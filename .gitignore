@@ -1,0 +1,14 @@
+# Build outputs & binaries
+/ZnipeOptimizationTool.exe
+/src/MainWindow.xaml
+*.old
+*.tmp
+*.log
+*.sys
+
+# IDE & Temp
+.vs/
+.vscode/
+bin/
+obj/
+driver/

@@ -1,0 +1,112 @@
+            <Border x:Name="TabContentBcd" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <TextBlock Text="HPET &amp; Timer Optimierung" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- CARD: BCDEDIT SETTINGS -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="BCDedit Plattform-Timer &amp; TSC-Synchronisation:" Style="{StaticResource SectionHeaderTitle}"/>
+
+                                <!-- ROW 1: useplatformclock -->
+                                <Border x:Name="BorderRowClock" Style="{StaticResource SettingRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="useplatformclock:" FontWeight="Bold" Foreground="#F8FAFC" FontSize="13"/>
+                                            <TextBlock Text="High Precision Event Timer (HPET)" FontSize="10.5" Foreground="#64748B"/>
+                                        </StackPanel>
+                                        <Border x:Name="PillClock" Grid.Column="1" Style="{StaticResource StatusPillBorder}" Padding="8,3" Margin="0,0,14,0" VerticalAlignment="Center" MinWidth="110">
+                                            <TextBlock x:Name="TxtPillClock" Text="STANDARD" FontSize="10" FontWeight="Bold" Foreground="#64748B" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <ComboBox x:Name="CmbClock" Grid.Column="2" SelectedIndex="0" Height="32">
+                                            <ComboBoxItem Content="Nicht gesetzt" Tag="DELETE"/>
+                                            <ComboBoxItem Content="Yes (HPET An)" Tag="yes"/>
+                                            <ComboBoxItem Content="No (HPET Aus)" Tag="no"/>
+                                        </ComboBox>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ROW 2: useplatformtick -->
+                                <Border x:Name="BorderRowTick" Style="{StaticResource SettingRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="useplatformtick:" FontWeight="Bold" Foreground="#F8FAFC" FontSize="13"/>
+                                            <TextBlock Text="Plattform-Tick erzwingen (TSC/HPET)" FontSize="10.5" Foreground="#64748B"/>
+                                        </StackPanel>
+                                        <Border x:Name="PillTick" Grid.Column="1" Style="{StaticResource StatusPillBorder}" Padding="8,3" Margin="0,0,14,0" VerticalAlignment="Center" MinWidth="110">
+                                            <TextBlock x:Name="TxtPillTick" Text="STANDARD" FontSize="10" FontWeight="Bold" Foreground="#64748B" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <ComboBox x:Name="CmbTick" Grid.Column="2" SelectedIndex="0" Height="32">
+                                            <ComboBoxItem Content="Nicht gesetzt" Tag="DELETE"/>
+                                            <ComboBoxItem Content="Yes (Plattform-Tick)" Tag="yes"/>
+                                            <ComboBoxItem Content="No" Tag="no"/>
+                                        </ComboBox>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ROW 3: tscsyncpolicy -->
+                                <Border x:Name="BorderRowTsc" Style="{StaticResource SettingRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="tscsyncpolicy:" FontWeight="Bold" Foreground="#F8FAFC" FontSize="13"/>
+                                            <TextBlock Text="TSC-Synchronisations-Richtlinie" FontSize="10.5" Foreground="#64748B"/>
+                                        </StackPanel>
+                                        <Border x:Name="PillTsc" Grid.Column="1" Style="{StaticResource StatusPillBorder}" Padding="8,3" Margin="0,0,14,0" VerticalAlignment="Center" MinWidth="110">
+                                            <TextBlock x:Name="TxtPillTsc" Text="STANDARD" FontSize="10" FontWeight="Bold" Foreground="#64748B" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <ComboBox x:Name="CmbTsc" Grid.Column="2" SelectedIndex="0" Height="32">
+                                            <ComboBoxItem Content="Nicht gesetzt" Tag="DELETE"/>
+                                            <ComboBoxItem Content="Enhanced" Tag="Enhanced"/>
+                                            <ComboBoxItem Content="Legacy" Tag="Legacy"/>
+                                            <ComboBoxItem Content="Default" Tag="Default"/>
+                                        </ComboBox>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ROW 4: disabledynamictick -->
+                                <Border x:Name="BorderRowDynamic" Style="{StaticResource SettingRowBorder}" Margin="0,0,0,16">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                            <TextBlock Text="disabledynamictick:" FontWeight="Bold" Foreground="#F8FAFC" FontSize="13"/>
+                                            <TextBlock Text="Dynamisches Tick-System (Power Savings)" FontSize="10.5" Foreground="#64748B"/>
+                                        </StackPanel>
+                                        <Border x:Name="PillDynamic" Grid.Column="1" Style="{StaticResource StatusPillBorder}" Padding="8,3" Margin="0,0,14,0" VerticalAlignment="Center" MinWidth="110">
+                                            <TextBlock x:Name="TxtPillDynamic" Text="STANDARD" FontSize="10" FontWeight="Bold" Foreground="#64748B" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <ComboBox x:Name="CmbDynamic" Grid.Column="2" SelectedIndex="0" Height="32">
+                                            <ComboBoxItem Content="Nicht gesetzt" Tag="DELETE"/>
+                                            <ComboBoxItem Content="Yes (Dynamic Tick Aus)" Tag="yes"/>
+                                            <ComboBoxItem Content="No (Dynamic Tick An)" Tag="no"/>
+                                        </ComboBox>
+                                    </Grid>
+                                </Border>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                    <Button x:Name="BtnResetBcd" Content="⚠️ BCD zurücksetzen (Standard)" Style="{StaticResource DangerBtn}" Height="34" Margin="0,0,10,0" Padding="14,0"/>
+                                    <Button x:Name="BtnOpenBcdCmd" Content="🔍 In CMD überprüfen" Style="{StaticResource SecondaryBtn}" Height="34" Padding="14,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

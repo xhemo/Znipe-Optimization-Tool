@@ -1,0 +1,55 @@
+            <!-- TOP HEADER BAR (BREADCRUMB, ACTIONS & WINDOW CHROME) -->
+            <Border x:Name="HeaderDragArea" Grid.Row="0" Background="#0B0D11" BorderBrush="#161922" BorderThickness="0,0,0,1" Padding="30,0,16,0">
+                <Grid Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- BREADCRUMB NAVIGATION -->
+                    <StackPanel Visibility="Collapsed">
+                        <TextBlock x:Name="TxtBreadcrumbIcon"/>
+                        <TextBlock x:Name="TxtBreadcrumbPath"/>
+                    </StackPanel>
+
+                    <!-- HEADER ACTIONS & WINDOW CONTROLS -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <!-- GLOBAL PC RESTART BUTTON -->
+                        <Button x:Name="BtnGlobalRestart" Style="{StaticResource DangerBtn}" Margin="0,0,8,0" Padding="12,5" Height="30" ToolTip="Erweiterte Neustart-Optionen (Normal, BIOS, Abgesicherter Modus)">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🔄 " FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Neustart" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- GLOBAL PC SHUTDOWN BUTTON -->
+                        <Button x:Name="BtnGlobalShutdown" Style="{StaticResource DangerBtn}" Margin="0,0,12,0" Padding="12,5" Height="30" ToolTip="PC herunterfahren">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⏻ " FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Text="Herunterfahren" FontSize="11" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- CUSTOM WINDOW CONTROLS -->
+                        <Button x:Name="BtnWinMinimize" Content="—" Style="{StaticResource WinCtrlBtn}" FontSize="13" ToolTip="Minimieren"/>
+                        <Button x:Name="BtnWinMaximize" Content="▢" Style="{StaticResource WinCtrlBtn}" FontSize="12" ToolTip="Maximieren"/>
+                        <Button x:Name="BtnWinClose" Content="✕" Style="{StaticResource WinCloseBtn}" FontSize="13" ToolTip="Schließen"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ADMIN WARNING BANNER (NUR WENN NICHT ADMIN) -->
+            <Border x:Name="BannerAdminWarning" Grid.Row="1" Background="#2C2114" BorderBrush="#F59E0B" BorderThickness="1" 
+                    CornerRadius="8" Padding="12,8" Margin="30,10,30,0" Visibility="Collapsed">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="⚠️ Nur Lese-Modus (Keine Administrator-Rechte)" FontWeight="Bold" Foreground="#FBBF24" FontSize="12"/>
+                        <TextBlock Text="Zum Anwenden und Optimieren von Windows-Einstellungen sind Administrator-Rechte erforderlich." Foreground="#FDE68A" FontSize="11"/>
+                    </StackPanel>
+                    <Button x:Name="BtnRelaunchAdmin" Grid.Column="1" Content="Als Admin starten" Style="{StaticResource PrimaryBtn}" FontSize="11" Background="#F59E0B" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>

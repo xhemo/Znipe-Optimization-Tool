@@ -1,0 +1,279 @@
+            <Border x:Name="TabContentApps" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+
+                        <!-- PAGE HEADER -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="Software &amp; Tools" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Live-Versionserkennung, 1-Klick-Updates und automatische Installation empfohlener Tools" Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- SEARCH & FILTER ROW -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- SEARCH BAR -->
+                            <Border Grid.Column="0" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Height="36" Padding="12,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="🔍" FontSize="13" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                    <TextBox x:Name="TxtSearchApps" Grid.Column="1" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontSize="12.5" VerticalAlignment="Center" CaretBrush="#38BDF8"/>
+                                    <TextBlock x:Name="TxtSearchAppsPlaceholder" Grid.Column="1" Text="Software &amp; Tools durchsuchen (z. B. Steam, Discord, BleachBit)..." FontSize="12" Foreground="#64748B" VerticalAlignment="Center" IsHitTestVisible="False" Margin="2,0,0,0"/>
+                                    <Button x:Name="BtnClearSearchApps" Grid.Column="2" Content="✕" Width="24" Height="24" FontSize="11" Background="Transparent" BorderThickness="0" Foreground="#94A3B8" Cursor="Hand" Visibility="Collapsed" Focusable="False" ToolTip="Suche leeren">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent" CornerRadius="4" Padding="2">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <!-- FILTER PILLS -->
+                            <Border Grid.Column="2" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Height="36" Padding="4,0" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <RadioButton x:Name="RadFilterAppsAll" GroupName="AppsFilterGroup" Content="Alle (7)" Style="{StaticResource FilterPillRadioGreen}" IsChecked="True" Padding="10,4" Margin="0,0,3,0"/>
+                                    <RadioButton x:Name="RadFilterAppsInstalled" GroupName="AppsFilterGroup" Content="Installiert" Style="{StaticResource FilterPillRadioGreen}" Padding="10,4" Margin="0,0,3,0"/>
+                                    <RadioButton x:Name="RadFilterAppsUpdates" GroupName="AppsFilterGroup" Content="Updates (0)" Style="{StaticResource FilterPillRadioGreen}" Padding="10,4" Margin="0,0,3,0"/>
+                                    <RadioButton x:Name="RadFilterAppsNotInstalled" GroupName="AppsFilterGroup" Content="Nicht installiert" Style="{StaticResource FilterPillRadioGreen}" Padding="10,4" Margin="0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- ACTION TOOLBAR -->
+                        <Border Style="{StaticResource CardBorder}" Padding="14,10" Margin="0,0,0,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- SELECTION -->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <CheckBox x:Name="ChkAppsSelectAll" Content="Alle auswählen" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- ACTIONS -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button x:Name="BtnRefreshApps" Content="🔄 Auf Updates prüfen" Style="{StaticResource SecondaryBtn}" Height="34" Padding="14,0" FontSize="11.5" Margin="0,0,8,0" ToolTip="Installations- und Updatestatus live prüfen"/>
+                                    <Button x:Name="BtnOpenDownloadFolder" Content="📁 Ordner" Style="{StaticResource SecondaryBtn}" Height="34" Padding="12,0" FontSize="11" Margin="0,0,8,0" ToolTip="Download-Ordner im Windows Explorer öffnen"/>
+                                    <Button x:Name="BtnActionSelectedApps" Content="🚀 Ausgewählte installieren" Style="{StaticResource SuccessBtn}" Height="34" Padding="18,0" FontSize="12" FontWeight="Bold" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- NO RESULTS HINT -->
+                        <Border x:Name="PanelAppsNoResults" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Padding="28" Margin="0,0,0,14" Visibility="Collapsed" HorizontalAlignment="Stretch">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="🔍 Keine passende Software gefunden" FontSize="13.5" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Versuche einen anderen Suchbegriff oder setze die Suche zurück." FontSize="11.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- APPS TABLE -->
+                        <Border Style="{StaticResource CardBorder}" Padding="14,10" Margin="0,0,0,14">
+                            <StackPanel>
+                                <!-- TABLE HEADER -->
+                                <Border BorderBrush="#171B25" BorderThickness="0,0,0,1" Padding="10,4,10,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="ANWENDUNG &amp; DETAILS" FontSize="11" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="STATUS" FontSize="11" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- STEAM -->
+                                <Border x:Name="RowAppSteam" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkSteam" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Steam" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppSteam" Text="Offizieller Gaming Client &amp; Spielebibliothek" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppSteam" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppSteam" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- DISCORD -->
+                                <Border x:Name="RowAppDiscord" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkDiscord" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Discord" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppDiscord" Text="Voice, Video &amp; Chat Plattform für Gamer" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppDiscord" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppDiscord" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ELGATO STREAM DECK -->
+                                <Border x:Name="RowAppStreamDeck" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkStreamDeck" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Elgato Stream Deck" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppStreamDeck" Text="Hardware-Steuerung &amp; Plugin-Software" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppStreamDeck" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppStreamDeck" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- BLEACHBIT -->
+                                <Border x:Name="RowAppBleachBit" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkBleachBit" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="BleachBit Cleaner" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppBleachBit" Text="Open-Source Cache &amp; Temp-Dateien Bereinigung" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppBleachBit" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppBleachBit" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- GOOGLE ANTIGRAVITY -->
+                                <Border x:Name="RowAppAntigravity" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkAntigravity" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Google Antigravity" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppAntigravity" Text="Offizielle Google Next-Gen Coding Suite &amp; Agent Engine" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppAntigravity" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppAntigravity" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- EVGA PRECISION X1 -->
+                                <Border x:Name="RowAppEvga" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkEvga" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="EVGA Precision X1" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppEvga" Text="GPU Tuning, Übertaktung &amp; Sensor-Monitor" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppEvga" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppEvga" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- HASLEO BACKUP SUITE -->
+                                <Border x:Name="RowAppHasleo" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkHasleo" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Hasleo Backup Suite Free" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescAppHasleo" Text="Windows Backup, System-Image &amp; Festplatten-Klonen" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border x:Name="PillAppHasleo" Style="{StaticResource AppPillBorder}">
+                                                <TextBlock x:Name="TxtPillAppHasleo" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- DETAILED PROGRESS CARD -->
+                        <Border x:Name="BorderAppProgress" Background="#12151D" CornerRadius="10" Padding="14,12" Margin="0,0,0,14" Visibility="Collapsed" BorderBrush="#252C3D" BorderThickness="1.2">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtAppStatus" Text="Lade Dateien herunter..." FontSize="12.5" FontWeight="Bold" Foreground="#38BDF8"/>
+                                        <TextBlock x:Name="TxtAppDownloadSize" Text="" FontSize="11.5" Foreground="#94A3B8" Margin="8,1,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtAppDownloadSpeed" Text="" FontSize="11.5" FontWeight="SemiBold" Foreground="#FBBF24" Margin="0,0,10,0"/>
+                                        <TextBlock x:Name="TxtAppDownloadPercent" Text="0%" FontSize="12.5" FontWeight="Bold" Foreground="#34D399" Margin="0,0,12,0"/>
+                                        <Button x:Name="BtnSkipAppDownload" Content="⏭ Überspringen" Style="{StaticResource SecondaryBtn}" Height="24" Padding="8,1" FontSize="10.5" Margin="0,0,6,0"/>
+                                        <Button x:Name="BtnCancelAppDownloads" Content="⏹ Abbrechen" Style="{StaticResource DangerBtn}" Height="24" Padding="8,1" FontSize="10.5"/>
+                                    </StackPanel>
+                                </Grid>
+                                <ProgressBar x:Name="ProgAppDownload" Height="8" Background="#181C26" Foreground="#38BDF8" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

@@ -1,0 +1,37 @@
+            <Border x:Name="TabContentUpdates" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <TextBlock Text="Windows Update &amp; Store Wartung" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- WINDOWS UPDATE CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="Windows Update" Style="{StaticResource CardTitleText}"/>
+                                    <TextBlock Text="Öffnet Windows Update und scannt direkt nach neuen Patches." Style="{StaticResource CardDescText}" Margin="0,4,16,0"/>
+                                </StackPanel>
+                                <Button x:Name="BtnRunWindowsUpdate" Grid.Column="1" Content="🔍 Windows Update starten" Style="{StaticResource PrimaryBtn}" Height="36"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- STORE UPDATES CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="Microsoft Store Updates" Style="{StaticResource CardTitleText}"/>
+                                    <TextBlock Text="Öffnet Microsoft Store Downloads für Updates von Gaming-Diensten &amp; Apps." Style="{StaticResource CardDescText}" Margin="0,4,16,0"/>
+                                </StackPanel>
+                                <Button x:Name="BtnRunStoreUpdate" Grid.Column="1" Content="🛍️ Store Updates öffnen" Style="{StaticResource SecondaryBtn}" Height="36"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

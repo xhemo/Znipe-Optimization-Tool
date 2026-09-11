@@ -1,0 +1,887 @@
+            <!-- TAB 0: HOME / TELEMETRY DASHBOARD (PARAGON STYLE) -->
+            <!-- ===================================================================== -->
+            <Border x:Name="TabContentHome" Grid.Row="2" Background="Transparent" Visibility="Visible">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- PAGE HEADER -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="Willkommen beim Znipe Optimization Tool" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Hardware-Telemetrie in Echtzeit • Alle Systemwerte auf einen Blick" Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- 4 HARDWARE TELEMETRY CARDS (CPU & GPU WITH GESAMT-POWER, RAM, GPU-LIMITS) -->
+                        <Grid x:Name="GridHomeTopCards" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- ========================================================= -->
+                            <!-- LEFT BLOCK: CPU & GPU + GESAMT-POWER DARUNTER (LANGEGEZOGEN) -->
+                            <!-- ========================================================= -->
+                            <Grid x:Name="PanelCpuGpuBlock" Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- ROW 0: CPU & GPU SIDE-BY-SIDE -->
+                                <Grid x:Name="GridCpuGpuRow" Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- CARD 1: CPU GRUPPE (TEMPERATUR, AUSLASTUNG, ENERGIEVERBRAUCH) -->
+                                    <Border x:Name="CardHomeCpu" Grid.Column="0" Style="{StaticResource CardBorder}" Padding="14">
+                                        <StackPanel>
+                                            <!-- HEADER -->
+                                            <Grid Margin="0,0,0,10">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <Border Width="26" Height="26" CornerRadius="7" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,8,0">
+                                                        <TextBlock Text="⚡" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <TextBlock Text="Prozessor (CPU)" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <Button x:Name="BtnViewDetailsCpu" Content="Details" Style="{StaticResource SecondaryBtn}" Height="24" FontSize="10" Padding="8,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                            </Grid>
+
+                                            <!-- KACHEL 1: CPU TEMPERATUR -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="🌡️" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Temperatur" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtCpuTempRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColCpuTempBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColCpuTempBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#EF4444" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- KACHEL 2: CPU AUSLASTUNG -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="📊" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Auslastung" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtCpuLoadRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColCpuLoadBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColCpuLoadBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#10B981" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- KACHEL 3: CPU ENERGIEVERBRAUCH -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="⚡" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Verbrauch" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtCpuPowerRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColCpuPowerBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColCpuPowerBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#F59E0B" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- CARD 2: GPU GRUPPE (TEMPERATUR, AUSLASTUNG, ENERGIEVERBRAUCH) -->
+                                    <Border x:Name="CardHomeGpu" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="14">
+                                        <StackPanel>
+                                            <!-- HEADER -->
+                                            <Grid Margin="0,0,0,10">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <Border Width="26" Height="26" CornerRadius="7" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,8,0">
+                                                        <TextBlock Text="🎮" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <TextBlock Text="Grafikkarte (GPU)" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <Button x:Name="BtnViewDetailsGpu" Content="Details" Style="{StaticResource SecondaryBtn}" Height="24" FontSize="10" Padding="8,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                            </Grid>
+
+                                            <!-- KACHEL 1: GPU TEMPERATUR -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="🌡️" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Temperatur" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtGpuTempRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColGpuTempBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColGpuTempBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#EF4444" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- KACHEL 2: GPU AUSLASTUNG -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="📊" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Auslastung" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtGpuLoadRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColGpuLoadBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColGpuLoadBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#10B981" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- KACHEL 3: GPU ENERGIEVERBRAUCH -->
+                                            <Border Style="{StaticResource SubCardBorder}" Padding="10,7">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <TextBlock Text="⚡" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                            <TextBlock Text="Verbrauch" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtGpuPowerRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition x:Name="ColGpuPowerBarFill" Width="0*"/>
+                                                                <ColumnDefinition x:Name="ColGpuPowerBarEmpty" Width="100*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Border Grid.Column="0" Background="#F59E0B" CornerRadius="2"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Grid>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!-- ROW 1: GESAMT-POWER (LANGEGEZOGEN UNTER CPU UND GPU) -->
+                                <Border Grid.Row="1" Background="#12151D" CornerRadius="10" BorderBrush="#1F2430" BorderThickness="1.2" Padding="14,9" Margin="0,6,0,0">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <Border Width="22" Height="22" CornerRadius="5" Background="#261E0F" BorderBrush="#4D3B17" BorderThickness="1" Margin="0,0,8,0">
+                                                    <TextBlock Text="⚡" FontSize="11" Foreground="#F59E0B" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock Text="Gesamt-Power" FontSize="12" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                                <TextBlock Text="·" FontSize="12" Foreground="#64748B" Margin="6,0"/>
+                                                <TextBlock x:Name="TxtTotalPowerSubtitle" Text="Kombinierter Verbrauch aus CPU und GPU" FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                            <TextBlock x:Name="TxtTotalPowerRow" Text="lädt..." FontSize="14" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <Border Grid.Row="1" Background="#0C0E14" Height="5" CornerRadius="2.5" Margin="0,7,0,0" ClipToBounds="True">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition x:Name="ColTotalPowerBarFill" Width="0*"/>
+                                                    <ColumnDefinition x:Name="ColTotalPowerBarEmpty" Width="100*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" Background="#F59E0B" CornerRadius="2.5"/>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <!-- ========================================================= -->
+                            <!-- COLUMN 2: CARD 3 - ARBEITSSPEICHER (RAM) -->
+                            <!-- ========================================================= -->
+                            <Border x:Name="CardHomeRam" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="14" VerticalAlignment="Top">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- HEADER -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Width="26" Height="26" CornerRadius="7" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,8,0">
+                                                <Path Data="M6 19v-3 M10 19v-3 M14 19v-3 M18 19v-3 M8 11V9 M16 11V9 M12 11V9 M2 15h20 M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z" Stroke="#F8FAFC" StrokeThickness="1.5" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Width="13" Height="13" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <TextBlock Text="Arbeitsspeicher" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnViewDetailsRam" Content="Details" Style="{StaticResource SecondaryBtn}" Height="24" FontSize="10" Padding="8,2" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+
+                                    <StackPanel Grid.Row="1">
+                                        <!-- KACHEL 1: RAM AUSLASTUNG -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="📊" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                        <TextBlock Text="Auslastung" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtRamLoadRow" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition x:Name="ColRamLoadBarFill" Width="0*"/>
+                                                            <ColumnDefinition x:Name="ColRamLoadBarEmpty" Width="100*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Background="#8B5CF6" CornerRadius="2"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 2: BELEGTER SPEICHER -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="💾" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                        <TextBlock Text="Belegt" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtRamUsedRow" Text="lädt..." FontSize="12" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition x:Name="ColRamMemBarFill" Width="0*"/>
+                                                            <ColumnDefinition x:Name="ColRamMemBarEmpty" Width="100*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Background="#0284C7" CornerRadius="2"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 3: FREIER SPEICHER -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <TextBlock Text="🟢" FontSize="10" Foreground="#FFFFFF" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="Freier Speicher" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtRamFreeRow" Text="lädt..." FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition x:Name="ColRamFreeBarFill" Width="0*"/>
+                                                            <ColumnDefinition x:Name="ColRamFreeBarEmpty" Width="100*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border Grid.Column="0" Background="#10B981" CornerRadius="2"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 4: EXPO / XMP RAM-PROFIL -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="⚡" FontSize="11" Foreground="#FFFFFF" Margin="0,0,4,0"/>
+                                                        <TextBlock x:Name="TxtRamExpoTitle" Text="EXPO / XMP" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtRamExpoSub" Text="lädt..." FontSize="9.5" Foreground="#64748B" Margin="0,1,0,0" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <Border x:Name="PillRamExpoStatus" Grid.Column="1" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="4" Padding="7,2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtRamExpoVal" Text="LÄDT..." FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                            <!-- ========================================================= -->
+                            <!-- COLUMN 4: CARD 4 - GPU CLOCK LOCK & STATUS -->
+                            <!-- ========================================================= -->
+                            <Border x:Name="CardHomeGpuLimits" Grid.Column="4" Style="{StaticResource CardBorder}" Padding="14" VerticalAlignment="Top">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!-- HEADER -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Width="26" Height="26" CornerRadius="7" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,8,0">
+                                                <TextBlock Text="⚡" FontSize="13" Foreground="#38BDF8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <TextBlock Text="GPU Clock Lock" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <Border x:Name="PillToggleGpuLimit" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="5" Padding="7,2" Cursor="Hand" ToolTip="Klicken für GPU Clock Lock Einstellungen">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtToggleGpuLimitDot" Text="⚙" FontSize="10" FontWeight="Bold" Foreground="#64748B" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="TxtToggleGpuLimitStatus" Text="Einstellungen" FontSize="9.5" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <StackPanel Grid.Row="1">
+                                        <!-- KACHEL 1: GPU CORE CLOCK -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="⚡" FontSize="11" Foreground="#38BDF8" Margin="0,0,4,0"/>
+                                                            <TextBlock Text="GPU-Takt" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                         <TextBlock x:Name="TxtGpuLimitPowerSub" Text="Max Boost: lädt..." FontSize="9.5" Foreground="#64748B" Margin="0,1,0,0" TextTrimming="CharacterEllipsis"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtGpuLimitPowerVal" Grid.Column="1" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition x:Name="ColGpuLimitBarFill" Width="0*"/>
+                                                            <ColumnDefinition x:Name="ColGpuLimitBarEmpty" Width="100*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border x:Name="BarGpuLimitFill" Grid.Column="0" Background="#0284C7" CornerRadius="2"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 2: POWER & TEMP -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="🔥" FontSize="11" Foreground="#FB923C" Margin="0,0,4,0"/>
+                                                            <TextBlock Text="Power &amp; Temp" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                        </StackPanel>
+                                                        <TextBlock x:Name="TxtGpuLimitTempSub" Text="Power-Limit: lädt..." FontSize="9.5" Foreground="#64748B" Margin="0,1,0,0" TextTrimming="CharacterEllipsis"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtGpuLimitTempVal" Grid.Column="1" Text="lädt..." FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                </Grid>
+                                                <Border Grid.Row="1" Style="{StaticResource MiniTrackBar}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition x:Name="ColGpuTempLimitBarFill" Width="0*"/>
+                                                            <ColumnDefinition x:Name="ColGpuTempLimitBarEmpty" Width="100*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Border x:Name="BarGpuTempLimitFill" Grid.Column="0" Background="#FB923C" CornerRadius="2"/>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 3: HARDWARE STATUS -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7" Margin="0,0,0,6">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,8,0">
+                                                    <TextBlock Text="🛡️" FontSize="11" Foreground="#FFFFFF" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="Modus" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <Border x:Name="PillGpuLimitSummary" Grid.Column="1" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="4" Padding="7,2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtGpuLimitStatusSummary" Text="LÄDT..." FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- KACHEL 4: PCIE-LANES / ANBINDUNG -->
+                                        <Border Style="{StaticResource SubCardBorder}" Padding="10,7">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="🔌" FontSize="11" Foreground="#FFFFFF" Margin="0,0,4,0"/>
+                                                        <TextBlock Text="PCIe-Lanes" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    <TextBlock x:Name="TxtGpuPcieSub" Text="lädt..." FontSize="9.5" Foreground="#64748B" Margin="0,1,0,0" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <Border x:Name="PillGpuPcieStatus" Grid.Column="1" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="4" Padding="7,2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtGpuPcieVal" Text="LÄDT..." FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                                </Border>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!-- MASTER MONITOR FILTER BAR -->
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Border Width="24" Height="24" CornerRadius="6" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,8,0">
+                                    <TextBlock Text="📈" FontSize="11" Foreground="#38BDF8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Echtzeit-Hardware-Monitore" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- FILTER CYCLE BUTTON (CYCLES: CPU+GPU ➔ NUR CPU ➔ NUR GPU) -->
+                            <Button x:Name="BtnFilterMonitorCycle" Grid.Column="1" HorizontalAlignment="Right"
+                                    Content="💻 CPU + GPU" 
+                                    Style="{StaticResource SecondaryBtn}"
+                                    Height="30"
+                                    Padding="14,0"
+                                   
+                                    ToolTip="Klicken zum Durchschalten: CPU + GPU ➔ Nur CPU ➔ Nur GPU"/>
+                        </Grid>
+
+                        <!-- BOTTOM SECTION: 3 DEDICATED LIVE MONITORS (ALL METRICS VISIBLE SIMULTANEOUSLY) -->
+                        <Grid x:Name="GridHomeMonitors" Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- ========================================================= -->
+                            <!-- MONITOR 1: TEMPERATUR (CPU + GPU) -->
+                            <!-- ========================================================= -->
+                            <Border x:Name="CardMonitorTemp" Grid.Column="0" Style="{StaticResource CardBorder}" Padding="14">
+                                <Grid MinHeight="230">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- HEADER -->
+                                    <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="26" Height="26" CornerRadius="6" Background="#261616" BorderBrush="#4D1F1F" BorderThickness="1.2" Margin="0,0,8,0">
+                                            <TextBlock Text="🌡️" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Temperatur" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!-- SEPARATOR -->
+                                    <Border Grid.Row="1" Style="{StaticResource SeparatorLine}" Margin="0,0,0,10"/>
+
+                                    <!-- GRAPH CANVAS WITH Y-AXIS -->
+                                    <Grid Grid.Row="2" Margin="0,0,0,6" Height="145">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="34"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Y-AXIS LABELS -->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock Text="100°C" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top"/>
+                                            <TextBlock Text="75°C" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                                            <TextBlock Text="50°C" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,56,0,0"/>
+                                            <TextBlock Text="25°C" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,84,0,0"/>
+                                            <TextBlock Text="0°C" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Bottom"/>
+                                        </Grid>
+
+                                        <!-- GRAPH PLOT AREA -->
+                                        <Border Grid.Column="1" Style="{StaticResource GraphPlotBorder}">
+                                            <Grid>
+                                                <!-- HORIZONTAL GRID LINES -->
+                                                <Line X1="0" Y1="1" X2="1000" Y2="1" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="30" X2="1000" Y2="30" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="60" X2="1000" Y2="60" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="90" X2="1000" Y2="90" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="120" X2="1000" Y2="120" Stroke="#161B26" StrokeDashArray="3 3"/>
+
+                                                <!-- LIVE PLOT POLYLINES -->
+                                                <Canvas x:Name="CanvasTempGraph" Background="Transparent" ClipToBounds="True">
+                                                    <Path x:Name="PathTempCpu" Stroke="#EF4444" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                                                    <Path x:Name="PathTempGpu" Stroke="#FB923C" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+
+                                                    <!-- HOVER TRACKING ELEMENTS -->
+                                                    <Line x:Name="LineHoverTemp" X1="0" Y1="0" X2="0" Y2="145" Stroke="#475569" StrokeThickness="1" StrokeDashArray="2 2" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverTempCpu" Width="8" Height="8" Fill="#EF4444" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverTempGpu" Width="8" Height="8" Fill="#FB923C" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Border x:Name="BadgeHoverTemp" Style="{StaticResource GraphHoverBadge}">
+                                                        <StackPanel>
+                                                            <TextBlock x:Name="TxtHoverTempTime" Text="jetzt" FontSize="8.5" Foreground="#94A3B8" Margin="0,0,0,2"/>
+                                                            <StackPanel Orientation="Horizontal" x:Name="PanelHoverTempCpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#EF4444" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverTempCpu" Text="CPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#F87171"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0" x:Name="PanelHoverTempGpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#FB923C" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverTempGpu" Text="GPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#FDBA74"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Canvas>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- X-AXIS TIME LABELS -->
+                                    <Grid Grid.Row="3" Margin="34,0,0,0">
+                                        <TextBlock Text="60s" FontSize="9" Foreground="#475569" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="30s" FontSize="9" Foreground="#475569" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="jetzt" FontSize="9" Foreground="#34D399" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- ========================================================= -->
+                            <!-- MONITOR 2: AUSLASTUNG (CPU + GPU) -->
+                            <!-- ========================================================= -->
+                            <Border x:Name="CardMonitorLoad" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="14">
+                                <Grid MinHeight="230">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- HEADER -->
+                                    <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="26" Height="26" CornerRadius="6" Background="#12241A" BorderBrush="#194D2E" BorderThickness="1.2" Margin="0,0,8,0">
+                                            <TextBlock Text="📊" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Auslastung" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!-- SEPARATOR -->
+                                    <Border Grid.Row="1" Style="{StaticResource SeparatorLine}" Margin="0,0,0,10"/>
+
+                                    <!-- GRAPH CANVAS WITH Y-AXIS -->
+                                    <Grid Grid.Row="2" Margin="0,0,0,6" Height="145">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="34"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Y-AXIS LABELS -->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock Text="100%" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top"/>
+                                            <TextBlock Text="75%" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                                            <TextBlock Text="50%" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,56,0,0"/>
+                                            <TextBlock Text="25%" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,84,0,0"/>
+                                            <TextBlock Text="0%" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Bottom"/>
+                                        </Grid>
+
+                                        <!-- GRAPH PLOT AREA -->
+                                        <Border Grid.Column="1" Style="{StaticResource GraphPlotBorder}">
+                                            <Grid>
+                                                <!-- HORIZONTAL GRID LINES -->
+                                                <Line X1="0" Y1="1" X2="1000" Y2="1" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="30" X2="1000" Y2="30" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="60" X2="1000" Y2="60" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="90" X2="1000" Y2="90" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="120" X2="1000" Y2="120" Stroke="#161B26" StrokeDashArray="3 3"/>
+
+                                                <!-- LIVE PLOT POLYLINES -->
+                                                <Canvas x:Name="CanvasLoadGraph" Background="Transparent" ClipToBounds="True">
+                                                    <Path x:Name="PathLoadCpu" Stroke="#10B981" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                                                    <Path x:Name="PathLoadGpu" Stroke="#06B6D4" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+
+                                                    <!-- HOVER TRACKING ELEMENTS -->
+                                                    <Line x:Name="LineHoverLoad" X1="0" Y1="0" X2="0" Y2="145" Stroke="#475569" StrokeThickness="1" StrokeDashArray="2 2" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverLoadCpu" Width="8" Height="8" Fill="#10B981" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverLoadGpu" Width="8" Height="8" Fill="#06B6D4" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Border x:Name="BadgeHoverLoad" Style="{StaticResource GraphHoverBadge}">
+                                                        <StackPanel>
+                                                            <TextBlock x:Name="TxtHoverLoadTime" Text="jetzt" FontSize="8.5" Foreground="#94A3B8" Margin="0,0,0,2"/>
+                                                            <StackPanel Orientation="Horizontal" x:Name="PanelHoverLoadCpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#10B981" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverLoadCpu" Text="CPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#34D399"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0" x:Name="PanelHoverLoadGpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#06B6D4" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverLoadGpu" Text="GPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#38BDF8"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Canvas>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- X-AXIS TIME LABELS -->
+                                    <Grid Grid.Row="3" Margin="34,0,0,0">
+                                        <TextBlock Text="60s" FontSize="9" Foreground="#475569" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="30s" FontSize="9" Foreground="#475569" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="jetzt" FontSize="9" Foreground="#34D399" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- ========================================================= -->
+                            <!-- MONITOR 3: VERBRAUCH IN WATT (CPU + GPU) -->
+                            <!-- ========================================================= -->
+                            <Border x:Name="CardMonitorPower" Grid.Column="4" Style="{StaticResource CardBorder}" Padding="14">
+                                <Grid MinHeight="230">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- HEADER -->
+                                    <StackPanel Grid.Row="0" Margin="0,0,0,10" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="26" Height="26" CornerRadius="6" Background="#262112" BorderBrush="#4D3B17" BorderThickness="1.2" Margin="0,0,8,0">
+                                            <TextBlock Text="⚡" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Verbrauch (Watt)" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                    </StackPanel>
+
+                                    <!-- SEPARATOR -->
+                                    <Border Grid.Row="1" Style="{StaticResource SeparatorLine}" Margin="0,0,0,10"/>
+
+                                    <!-- GRAPH CANVAS WITH Y-AXIS -->
+                                    <Grid Grid.Row="2" Margin="0,0,0,6" Height="145">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="34"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Y-AXIS LABELS -->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock x:Name="TxtGraphPowerYMax" Text="500W" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top"/>
+                                            <TextBlock x:Name="TxtGraphPowerY75" Text="375W" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,28,0,0"/>
+                                            <TextBlock x:Name="TxtGraphPowerY50" Text="250W" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,56,0,0"/>
+                                            <TextBlock x:Name="TxtGraphPowerY25" Text="125W" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top" Margin="0,84,0,0"/>
+                                            <TextBlock Text="0W" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Bottom"/>
+                                        </Grid>
+
+                                        <!-- GRAPH PLOT AREA -->
+                                        <Border Grid.Column="1" Style="{StaticResource GraphPlotBorder}">
+                                            <Grid>
+                                                <!-- HORIZONTAL GRID LINES -->
+                                                <Line X1="0" Y1="1" X2="1000" Y2="1" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="30" X2="1000" Y2="30" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="60" X2="1000" Y2="60" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="90" X2="1000" Y2="90" Stroke="#161B26" StrokeDashArray="3 3"/>
+                                                <Line X1="0" Y1="120" X2="1000" Y2="120" Stroke="#161B26" StrokeDashArray="3 3"/>
+
+                                                <!-- LIVE PLOT POLYLINES -->
+                                                <Canvas x:Name="CanvasPowerGraph" Background="Transparent" ClipToBounds="True">
+                                                    <Path x:Name="PathPowerCpu" Stroke="#F59E0B" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                                                    <Path x:Name="PathPowerGpu" Stroke="#C084FC" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+
+                                                    <!-- HOVER TRACKING ELEMENTS -->
+                                                    <Line x:Name="LineHoverPower" X1="0" Y1="0" X2="0" Y2="145" Stroke="#475569" StrokeThickness="1" StrokeDashArray="2 2" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverPowerCpu" Width="8" Height="8" Fill="#F59E0B" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Ellipse x:Name="DotHoverPowerGpu" Width="8" Height="8" Fill="#C084FC" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                    <Border x:Name="BadgeHoverPower" Style="{StaticResource GraphHoverBadge}">
+                                                        <StackPanel>
+                                                            <TextBlock x:Name="TxtHoverPowerTime" Text="jetzt" FontSize="8.5" Foreground="#94A3B8" Margin="0,0,0,2"/>
+                                                            <StackPanel Orientation="Horizontal" x:Name="PanelHoverPowerCpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#F59E0B" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverPowerCpu" Text="CPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#FBBF24"/>
+                                                            </StackPanel>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,2,0,0" x:Name="PanelHoverPowerGpu">
+                                                                <Ellipse Width="5" Height="5" Fill="#C084FC" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverPowerGpu" Text="GPU: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#E879F9"/>
+                                                            </StackPanel>
+                                                            <Border x:Name="SepHoverPowerTotal" Height="1" Background="#262D3D" Margin="0,3,0,2" Visibility="Collapsed"/>
+                                                            <StackPanel Orientation="Horizontal" Margin="0,1,0,0" x:Name="PanelHoverPowerTotal" Visibility="Collapsed">
+                                                                <Ellipse Width="5" Height="5" Fill="#38BDF8" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                <TextBlock x:Name="TxtHoverPowerTotal" Text="Summe: lädt..." FontSize="9.5" FontWeight="Bold" Foreground="#38BDF8"/>
+                                                            </StackPanel>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Canvas>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- X-AXIS TIME LABELS -->
+                                    <Grid Grid.Row="3" Margin="34,0,0,0">
+                                        <TextBlock Text="60s" FontSize="9" Foreground="#475569" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="30s" FontSize="9" Foreground="#475569" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="jetzt" FontSize="9" Foreground="#34D399" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!-- ===================================================================== -->
+                        <!-- HARDWARE STRESS TEST PANEL (CPU & GPU MAX LIMIT) -->
+                        <!-- ===================================================================== -->
+                        <Border Style="{StaticResource CardBorder}" Padding="14,10" Margin="0,0,0,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- TOP: HEADER & CONTROLS -->
+                                <Grid Grid.Row="0" Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- LEFT: ICON & TITLE -->
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="34" Height="34" CornerRadius="8" Background="#261616" BorderBrush="#4D1F1F" BorderThickness="1.2" Margin="0,0,12,0">
+                                            <TextBlock Text="🔥" FontSize="16" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Hardware-Stresstest" FontSize="14" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <Border x:Name="PillStressStatus" Style="{StaticResource StatusPillBorder}" Padding="6,1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtStressStatus" Text="BEREIT" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                                </Border>
+                                            </StackPanel>
+                                            <TextBlock Text="100% native CPU (AVX/FMA) &amp; GPU (OpenCL Shader) Auslastung bis ans Limit" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- RIGHT: TARGET SELECTOR, TIMER & BUTTON -->
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <RadioButton x:Name="RadStressBoth" GroupName="StressTargetGroup" Content="CPU + GPU" Style="{StaticResource FilterPillRadio}" IsChecked="True" Padding="10,5"/>
+                                        <RadioButton x:Name="RadStressCpu" GroupName="StressTargetGroup" Content="Nur CPU" Style="{StaticResource FilterPillRadio}" Padding="10,5"/>
+                                        <RadioButton x:Name="RadStressGpu" GroupName="StressTargetGroup" Content="Nur GPU" Style="{StaticResource FilterPillRadio}" Padding="10,5" Margin="0,0,10,0"/>
+
+                                        <!-- DURATION BADGE -->
+                                        <Border Background="#161A24" BorderBrush="#232B3C" BorderThickness="1" CornerRadius="6" Padding="10,5" Margin="0,0,10,0" VerticalAlignment="Center">
+                                            <TextBlock x:Name="TxtStressDuration" Text="⏱ 00:00" FontSize="11.5" FontWeight="Bold" FontFamily="Consolas" Foreground="#94A3B8"/>
+                                        </Border>
+
+                                        <!-- START / STOP ACTION BUTTON -->
+                                        <Button x:Name="BtnStressToggle" Style="{StaticResource SuccessBtn}" Height="34" Padding="16,0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Name="TxtStressBtnIcon" Text="🔥 " FontSize="12" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+                                                <TextBlock x:Name="TxtStressBtnLabel" Text="Stresstest starten" FontSize="11.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- BOTTOM: LIVE METRICS & FEEDBACK STRIP -->
+                                <Border Grid.Row="1" Background="#0B0E14" CornerRadius="8" BorderBrush="#1C212E" BorderThickness="1" Padding="12,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Live-Status:" FontSize="11" Foreground="#64748B" Margin="0,0,8,0"/>
+                                            <TextBlock x:Name="TxtStressLiveFeedback" Text="Hardware im Ruhezustand. Klicke auf 'Stresstest starten', um CPU und GPU maximal auszulasten." FontSize="11" Foreground="#94A3B8"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="⚠️ Kann jederzeit per Knopfdruck gestoppt werden" FontSize="10.5" Foreground="#64748B" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ===================================================================== -->
+            <!-- TAB: HARDWARE & SYSTEM INFO -->
+            <!-- ===================================================================== -->

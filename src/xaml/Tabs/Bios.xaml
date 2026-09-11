@@ -1,0 +1,124 @@
+            <Border x:Name="TabContentBios" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <TextBlock Text="BIOS / UEFI Einstellungen &amp; Live-Status" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- SECURE BOOT CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="🛡️ Secure Boot" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock x:Name="TxtLiveSecureBoot" Visibility="Collapsed"/>
+                                    <TextBlock Text="Erforderlich für Riot Vanguard (Valorant), FaceIT AC &amp; Windows 11 Boot-Integrität." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border x:Name="PillLiveSecureBoot" Grid.Column="1" Style="{StaticResource StatusBadgeActive}">
+                                    <TextBlock x:Name="TxtPillLiveSecureBoot" Text="AKTIV"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+
+                        <!-- RESIZABLE BAR (REBAR / SAM) CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="🚀 Resizable BAR (ReBAR / SAM)" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock x:Name="TxtLiveRebar" Visibility="Collapsed"/>
+                                    <TextBlock Text="Ermöglicht der CPU vollen Zugriff auf den gesamten Grafikspeicher (VRAM) für maximale Gaming-FPS." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border x:Name="PillLiveRebar" Grid.Column="1" Style="{StaticResource StatusBadgeActive}">
+                                    <TextBlock x:Name="TxtPillLiveRebar" Text="AKTIV"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- 3. INTEGRIERTE GRAFIK (iGPU) CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="🖥️ Integrierte Grafik (iGPU)" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock x:Name="TxtLiveIgpu" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="TxtDescIgpu" Text="Integrierte Onboard-Grafik im BIOS abschalten spart System-RAM, SoC-Hitze und Treiber-Interrupts." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border x:Name="PillLiveIgpu" Grid.Column="1" Style="{StaticResource StatusBadgeActive}">
+                                    <TextBlock x:Name="TxtPillLiveIgpu" Text="DEAKTIVIERT"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- 3. WLAN / WI-FI CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="📶 Onboard WLAN / Wi-Fi" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock x:Name="TxtLiveWlan" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="TxtDescWlan" Text="Schaltet ungenutztes WLAN im BIOS ab für weniger Interrupts und minimale Latenzen." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border x:Name="PillLiveWlan" Grid.Column="1" Style="{StaticResource StatusBadgeActive}">
+                                    <TextBlock x:Name="TxtPillLiveWlan" Text="DEAKTIVIERT"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- 4. BLUETOOTH CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="📡 Onboard Bluetooth" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock x:Name="TxtLiveBt" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="TxtDescBt" Text="Funkmodul für Controller/Headset (Kann im BIOS für geringere Treiberlast deaktiviert werden)." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border x:Name="PillLiveBt" Grid.Column="1" Style="{StaticResource StatusBadgeActive}">
+                                    <TextBlock x:Name="TxtPillLiveBt" Text="DEAKTIVIERT"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- OPTIONALE BIOS-EINSTELLUNGEN -->
+                        <TextBlock Text="Optionale BIOS-Einstellungen (Manuell)" Style="{StaticResource SectionHeaderTitle}" Margin="0,8,0,10"/>
+
+                        <!-- 5. AC POWER LOSS CARD (OPTIONAL) -->
+                        <Border Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <TextBlock Text="🔌 Restore AC Power Loss" FontWeight="Bold" Foreground="#FFFFFF" FontSize="13.5"/>
+                                    <TextBlock Text="Der PC schaltet sich automatisch ein, sobald die Steckdose / Stromleiste eingeschaltet wird." 
+                                               FontSize="11" Foreground="#94A3B8" Margin="0,3,0,0"/>
+                                </StackPanel>
+                                <Border Grid.Column="1" Style="{StaticResource StatusPillBorder}" Padding="8,3" VerticalAlignment="Center">
+                                    <TextBlock Text="OPTIONAL" FontSize="10" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

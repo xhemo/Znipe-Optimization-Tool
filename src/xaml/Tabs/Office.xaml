@@ -1,0 +1,269 @@
+            <Border x:Name="TabContentOffice" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+
+                        <!-- PAGE HEADER -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="Microsoft Office" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Click-to-Run Suite &amp; permanente Lizenz-Aktivierung" Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- ACTION TOOLBAR -->
+                        <Border Style="{StaticResource CardBorder}" Padding="14,10" Margin="0,0,0,12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- SELECTION -->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,14,0">
+                                    <CheckBox x:Name="ChkOfficeSelectAll" Content="Alle auswählen" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <!-- FILTER PILLS -->
+                                <Border Grid.Column="1" HorizontalAlignment="Left" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Height="34" Padding="4,0" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <RadioButton x:Name="RadFilterOfficeAll" GroupName="OfficeFilterGroup" Content="Alle (8)" Style="{StaticResource FilterPillRadioGreen}" IsChecked="True" Padding="10,4" Margin="0,0,3,0"/>
+                                        <RadioButton x:Name="RadFilterOfficeInstalled" GroupName="OfficeFilterGroup" Content="Installiert" Style="{StaticResource FilterPillRadioGreen}" Padding="10,4" Margin="0,0,3,0"/>
+                                        <RadioButton x:Name="RadFilterOfficeNotInstalled" GroupName="OfficeFilterGroup" Content="Nicht installiert" Style="{StaticResource FilterPillRadioGreen}" Padding="10,4" Margin="0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- ACTIONS -->
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button x:Name="BtnOhookActivate" Content="🔑 Lizenz aktivieren" Style="{StaticResource SecondaryBtn}" Height="34" Padding="14,0" FontSize="11.5" Margin="0,0,8,0" ToolTip="Office-Lizenzstatus umschalten"/>
+                                    <Button x:Name="BtnInstallSelectedApps" Content="🚀 Ausgewählte installieren" Style="{StaticResource SuccessBtn}" Height="34" Padding="18,0" FontSize="12" FontWeight="Bold" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- APPS TABLE -->
+                        <Border Style="{StaticResource CardBorder}" Padding="14,10" Margin="0,0,0,14">
+                            <StackPanel>
+                                <!-- TABLE HEADER -->
+                                <Border BorderBrush="#171B25" BorderThickness="0,0,0,1" Padding="10,4,10,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="ANWENDUNG &amp; DETAILS" FontSize="11" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="STATUS" FontSize="11" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- WORD -->
+                                <Border x:Name="RowOfficeWord" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeWord" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#185ABD" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="W" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Word" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeWord" Text="Textverarbeitung  •  ~1.2 GB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeWord" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeWord" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- EXCEL -->
+                                <Border x:Name="RowOfficeExcel" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeExcel" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#107C41" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="X" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Excel" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeExcel" Text="Tabellenkalkulation  •  ~950 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeExcel" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeExcel" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- POWERPOINT -->
+                                <Border x:Name="RowOfficePowerPoint" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficePowerPoint" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#C43E1C" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="P" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft PowerPoint" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficePowerPoint" Text="Präsentationen  •  ~850 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficePowerPoint" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficePowerPoint" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- OUTLOOK -->
+                                <Border x:Name="RowOfficeOutlook" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeOutlook" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#0078D4" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="O" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Outlook" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeOutlook" Text="E-Mail &amp; Kalender  •  ~1.1 GB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeOutlook" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeOutlook" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ONENOTE -->
+                                <Border x:Name="RowOfficeOneNote" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeOneNote" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#7719AA" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="N" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft OneNote" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeOneNote" Text="Digitales Notizbuch  •  ~450 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeOneNote" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeOneNote" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ACCESS -->
+                                <Border x:Name="RowOfficeAccess" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeAccess" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#A4373A" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="A" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Access" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeAccess" Text="Datenbankverwaltung  •  ~600 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeAccess" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeAccess" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- PUBLISHER -->
+                                <Border x:Name="RowOfficePublisher" Style="{StaticResource AppRowBorder}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficePublisher" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#007A7C" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="P" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Publisher" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficePublisher" Text="Layouts &amp; Druckpublikationen  •  ~500 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficePublisher" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficePublisher" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- TEAMS -->
+                                <Border x:Name="RowOfficeTeams" Style="{StaticResource AppRowBorder}" BorderThickness="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <CheckBox x:Name="ChkOfficeTeams" Style="{StaticResource ModernCheckBox}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <Border Width="30" Height="30" CornerRadius="6" Background="#464EB8" Margin="0,0,12,0" VerticalAlignment="Center">
+                                                <TextBlock Text="T" FontSize="14" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Microsoft Teams" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock x:Name="TxtDescOfficeTeams" Text="Zusammenarbeit &amp; Chats  •  ~400 MB" FontSize="11" Foreground="#64748B" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border x:Name="PillOfficeTeams" Grid.Column="1" Style="{StaticResource OfficePillBorder}" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPillOfficeTeams" Text="NICHT INSTALLIERT" Style="{StaticResource OfficePillText}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- LIVE PROGRESS BAR -->
+                        <Border x:Name="BorderOfficeProgress" Background="#12151D" CornerRadius="10" Padding="14" Margin="0,0,0,14" Visibility="Collapsed" BorderBrush="#1F2430" BorderThickness="1">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="TxtOfficeStatus" Text="Initialisiere..." FontSize="12.5" FontWeight="SemiBold" Foreground="#38BDF8" VerticalAlignment="Center"/>
+                                    <Button x:Name="BtnCancelOfficeAction" Grid.Column="1" Content="✕ Abbrechen" Style="{StaticResource DangerBtn}" Height="26" Padding="12,2" FontSize="11" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ProgressBar x:Name="ProgOfficeDownload" Height="8" Minimum="0" Maximum="100" Value="0" Background="#181C26" Foreground="#38BDF8" BorderThickness="0"/>
+                                <Grid Margin="0,6,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="TxtOfficeDownloadDetails" Text="📦 0 MB" FontSize="11" Foreground="#94A3B8" Visibility="Collapsed"/>
+                                    <TextBlock x:Name="TxtOfficeEta" Grid.Column="1" Text="" FontSize="11" FontWeight="SemiBold" Foreground="#F59E0B" Visibility="Collapsed"/>
+                                </Grid>
+                                <TextBlock x:Name="TxtOfficeSubStatus" Margin="0,4,0,0" Text="" FontSize="10.5" Foreground="#64748B" TextTrimming="CharacterEllipsis" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

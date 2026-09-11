@@ -1,0 +1,434 @@
+            <Border x:Name="TabContentTimerRes" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- PAGE HEADER -->
+                        <TextBlock Text="Timer Resolution" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- CARD: GLOBAL TIMER RESOLUTION REQUESTS (AB WIN 11) -->
+                        <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,0,0,16">
+                            <Grid>
+                                <StackPanel VerticalAlignment="Top">
+                                    <!-- HEADER -->
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE916;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="GlobalTimerResolutionRequests" FontSize="14.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                                <TextBlock Text="Kernel-Timer Präzision für Spiele" FontSize="11" Foreground="#64748B"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border Grid.Column="1" Style="{StaticResource TagBadgeInfo}">
+                                            <TextBlock Text="AB WINDOWS 11 ERFORDERLICH"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- SEPARATOR -->
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,4,0,12"/>
+
+                                    <!-- DESCRIPTION & WIN 11 INFO -->
+                                    <TextBlock Text="Erzwingt globale Timer-Anforderungen des Kernels (1 = Aktiv). Ab Windows 11 ignoriert das Betriebssystem standardmäßig globale Timer-Auflösungen von Spielen und Anwendungen (Drosselung auf bis zu 15.6ms). Durch Aktivierung dieses Schlüssels respektiert Windows 11 wieder 0.5ms/1ms Hochpräzisions-Timer für minimale Input-Latenz und ruckelfreies Frametime-Pacing." 
+                                               FontSize="11.5" Foreground="#94A3B8" TextWrapping="Wrap" LineHeight="16" Margin="0,0,0,14"/>
+
+                                    <!-- FOOTER -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock x:Name="TxtKernelSubtitle" Text="Status: Nicht optimiert" FontSize="11" Foreground="#EF4444" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                            <Border x:Name="PillKernel" Style="{StaticResource StatusPillBorder}" Padding="8,3" VerticalAlignment="Center">
+                                                <TextBlock x:Name="TxtPillKernel" Text="STANDARD (0)" FontSize="9.5" FontWeight="Bold" Foreground="#64748B"/>
+                                            </Border>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenKernelRegedit" Grid.Column="1" Content="🛠️ Regedit" Style="{StaticResource SecondaryBtn}" Height="28" FontSize="11" Padding="12,2" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <ToggleButton x:Name="ToggleKernelTimer" Grid.Column="2" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- LARGE MEASURESLEEP LIVE MONITOR CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,0,0,16">
+                            <StackPanel>
+                                <!-- HEADER & CONTROLS -->
+                                <Grid Margin="0,0,0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                     <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                                         <Border Style="{StaticResource IconBoxBorder}">
+                                             <TextBlock Style="{StaticResource IconBoxText}" Text="&#xF1AD;"/>
+                                         </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="MeasureSleep Live-Analyse" FontSize="14.5" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,2"/>
+                                            <TextBlock Text="Präzisions-Messung von NtQueryTimerResolution &amp; Sleep(1)" FontSize="11" Foreground="#64748B"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <!-- ACTION BUTTONS -->
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button x:Name="BtnToggleMeasureSleep" Content="⏸️ Pause" Style="{StaticResource SecondaryBtn}" Height="28" FontSize="10.5" Padding="10,2" Margin="0,0,6,0"/>
+                                        <Button x:Name="BtnClearMeasureSleep" Content="🗑️ Leeren" Style="{StaticResource SecondaryBtn}" Height="28" FontSize="10.5" Padding="10,2"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- PROMINENT STATUS / VERDICT BANNER -->
+                                <Border x:Name="BorderMeasureSleepVerdict" Background="#132438" BorderBrush="#38BDF8" BorderThickness="1.2" CornerRadius="8" Padding="14,8" Margin="0,0,0,14">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Name="TxtMeasureSleepVerdictIcon" Grid.Column="0" Text="🔬" FontSize="16" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                                        <TextBlock x:Name="TxtMeasureSleepVerdictTitle" Grid.Column="1" Text="Ermittle Timer-Latenz &amp; Sleep(1) Reaktion..." FontSize="12.5" FontWeight="Bold" Foreground="#38BDF8" VerticalAlignment="Center"/>
+
+                                        <Border x:Name="PillMeasureSleepVerdict" Grid.Column="2" Background="#0C4A6E" CornerRadius="4" Padding="8,3" VerticalAlignment="Center">
+                                            <TextBlock x:Name="TxtPillMeasureSleepVerdict" Text="MESSUNG LÄUFT" FontSize="10" FontWeight="Bold" Foreground="#7DD3FC"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- METRIC SUMMARY CARDS -->
+                                <Grid Margin="0,0,0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- RESOLUTION -->
+                                    <Border Grid.Column="0" Background="#0E1118" CornerRadius="8" BorderBrush="#1B202C" BorderThickness="1" Padding="12,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                                <TextBlock Text="Timer-Auflösung" FontSize="10.5" FontWeight="SemiBold" Foreground="#64748B" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="TxtTimerResCurrent" Text="lädt..." FontSize="18" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </StackPanel>
+
+                                            <!-- MANUAL TIMER INPUT & APPLY -->
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
+                                                <Border Background="#161B26" BorderBrush="#2D3748" BorderThickness="1" CornerRadius="5" Padding="4,2" Margin="0,0,4,0" VerticalAlignment="Center">
+                                                    <TextBox x:Name="TxtManualTimerRes" Text="0.5100" Width="44" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <Button x:Name="BtnApplyManualTimer" Content="⚡ Setzen" Style="{StaticResource SecondaryBtn}" Height="25" FontSize="10.5" FontWeight="SemiBold" Padding="7,1" VerticalAlignment="Center" ToolTip="Aktualisiert Autostart-Verknüpfung (Eigenschaften), beendet SetTimerResolution und startet neu"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- SLEPT(1) -->
+                                    <Border x:Name="BorderMeasureSleepLastSlept" Grid.Column="2" Background="#0E1118" CornerRadius="8" BorderBrush="#1B202C" BorderThickness="1.2" Padding="14,10">
+                                        <StackPanel>
+                                            <TextBlock Text="Letztes Sleep(1)" FontSize="10.5" FontWeight="SemiBold" Foreground="#64748B" Margin="0,0,0,3"/>
+                                            <TextBlock x:Name="TxtMeasureSleepLastSlept" Text="lädt..." FontSize="18" FontWeight="Bold" Foreground="#34D399"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- DELTA -->
+                                    <Border x:Name="BorderMeasureSleepDelta" Grid.Column="4" Background="#0E1118" CornerRadius="8" BorderBrush="#1B202C" BorderThickness="1.2" Padding="14,10">
+                                        <StackPanel>
+                                            <TextBlock Text="Jitter / Delta" FontSize="10.5" FontWeight="SemiBold" Foreground="#64748B" Margin="0,0,0,3"/>
+                                            <TextBlock x:Name="TxtMeasureSleepDelta" Text="lädt..." FontSize="18" FontWeight="Bold" Foreground="#34D399"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!-- 2-COLUMN VIEW: TERMINAL CONSOLE (LEFT) + LIVE JITTER DIAGRAM (RIGHT) -->
+                                <Grid Height="265">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- LEFT COLUMN: TERMINAL CONSOLE -->
+                                    <Border Grid.Column="0" Background="#080A0F" CornerRadius="8" BorderBrush="#1A1F2C" BorderThickness="1.2" Padding="10,8">
+                                        <ScrollViewer x:Name="ScrollMeasureSleep" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                            <TextBox x:Name="TxtMeasureSleepLog" 
+                                                     Background="Transparent" 
+                                                     Foreground="#F1F5F9" 
+                                                     BorderThickness="0" 
+                                                     FontFamily="Consolas, Courier New, monospace" 
+                                                     FontSize="11" 
+                                                     IsReadOnly="True" 
+                                                     TextWrapping="NoWrap" 
+                                                     IsUndoEnabled="False"
+                                                     AcceptsReturn="True"/>
+                                        </ScrollViewer>
+                                    </Border>
+
+                                    <!-- RIGHT COLUMN: JITTER LIVE DIAGRAM (1:1 STYLE LIKE PERFORMANCE TAB) -->
+                                    <Border Grid.Column="2" Style="{StaticResource CardBorder}" Padding="14">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <!-- HEADER -->
+                                            <Grid Grid.Row="0" Margin="0,0,0,10">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <Border Width="26" Height="26" CornerRadius="6" Background="#12241A" BorderBrush="#194D2E" BorderThickness="1.2" Margin="0,0,8,0">
+                                                        <TextBlock Text="📈" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <TextBlock Text="Live Sleep(1) Jitter-Verlauf" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                                <TextBlock x:Name="TxtJitterLiveVal" Text="— ms" FontSize="13" FontWeight="Bold" Foreground="#34D399" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                            </Grid>
+
+                                            <!-- SEPARATOR -->
+                                            <Border Grid.Row="1" Style="{StaticResource SeparatorLine}" Margin="0,0,0,10"/>
+
+                                            <!-- GRAPH CANVAS WITH Y-AXIS -->
+                                            <Grid Grid.Row="2" Margin="0,0,0,6" Height="145">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="38"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Y-AXIS LABELS -->
+                                                <Grid Grid.Column="0">
+                                                    <TextBlock x:Name="TxtJitterYMax" Text="+1.000 ms" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Top"/>
+                                                    <TextBlock x:Name="TxtJitterYMid" Text="0.000 ms" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Center"/>
+                                                    <TextBlock x:Name="TxtJitterYMin" Text="-1.000 ms" FontSize="8.5" Foreground="#64748B" VerticalAlignment="Bottom"/>
+                                                </Grid>
+
+                                                <!-- GRAPH PLOT AREA -->
+                                                <Border Grid.Column="1" Style="{StaticResource GraphPlotBorder}">
+                                                    <Grid>
+                                                        <!-- HORIZONTAL GRID LINES -->
+                                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#161B26" StrokeDashArray="3 3" Stretch="Fill" VerticalAlignment="Top" Margin="0,1,0,0"/>
+                                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#161B26" StrokeDashArray="3 3" Stretch="Fill" VerticalAlignment="Top" Margin="0,36,0,0"/>
+                                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#161B26" StrokeDashArray="3 3" Stretch="Fill" VerticalAlignment="Top" Margin="0,72,0,0"/>
+                                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#161B26" StrokeDashArray="3 3" Stretch="Fill" VerticalAlignment="Top" Margin="0,108,0,0"/>
+                                                        <Line X1="0" Y1="0" X2="1" Y2="0" Stroke="#161B26" StrokeDashArray="3 3" Stretch="Fill" VerticalAlignment="Top" Margin="0,143,0,0"/>
+
+                                                        <!-- LIVE CANVAS -->
+                                                        <Canvas x:Name="CanvasJitterGraph" Background="Transparent" ClipToBounds="True">
+                                                            <Line x:Name="LineJitterTarget" X1="0" Y1="66" X2="1000" Y2="66" Stroke="#10B981" StrokeThickness="1.2" StrokeDashArray="4 3" Opacity="0.9"/>
+                                                            <TextBlock x:Name="TxtJitterTargetLabel" Text="── &lt; 0.100 ms Ziel" FontSize="8.5" FontWeight="Bold" Foreground="#34D399" Canvas.Left="6" Canvas.Top="53"/>
+                                                            <Path x:Name="PathJitter" Stroke="#FFFFFF" StrokeThickness="2" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+
+                                                            <!-- HOVER TRACKING ELEMENTS -->
+                                                            <Line x:Name="LineJitterHover" X1="0" Y1="0" X2="0" Y2="145" Stroke="#475569" StrokeThickness="1" StrokeDashArray="2 2" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                            <Ellipse x:Name="DotJitterHover" Width="8" Height="8" Fill="#10B981" Stroke="#FFFFFF" StrokeThickness="1.5" Visibility="Collapsed" IsHitTestVisible="False"/>
+                                                            <Border x:Name="BadgeJitterHover" Style="{StaticResource GraphHoverBadge}">
+                                                                <StackPanel>
+                                                                    <TextBlock x:Name="TxtJitterHoverTime" Text="jetzt" FontSize="8.5" Foreground="#94A3B8" Margin="0,0,0,2"/>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Ellipse Width="5" Height="5" Fill="#34D399" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                                                                        <TextBlock x:Name="TxtJitterHover" Text="Delta: — ms" FontSize="9.5" FontWeight="Bold" Foreground="#6EE7B7"/>
+                                                                    </StackPanel>
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Canvas>
+                                                    </Grid>
+                                                </Border>
+                                            </Grid>
+
+                                            <!-- X-AXIS TIME LABELS -->
+                                            <Grid Grid.Row="3" Margin="38,0,0,6">
+                                                <TextBlock Text="40s" FontSize="9" Foreground="#475569" HorizontalAlignment="Left"/>
+                                                <TextBlock Text="20s" FontSize="9" Foreground="#475569" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="jetzt" FontSize="9" Foreground="#34D399" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                            </Grid>
+
+                                            <!-- STATS FOOTER -->
+                                            <Grid Grid.Row="4" Margin="0,2,0,0">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                    <TextBlock Text="Min: " FontSize="9.5" Foreground="#64748B"/>
+                                                    <TextBlock x:Name="TxtJitterMin" Text="— ms" FontSize="9.5" FontWeight="SemiBold" Foreground="#94A3B8" Margin="0,0,10,0"/>
+                                                    <TextBlock Text="Avg: " FontSize="9.5" Foreground="#64748B"/>
+                                                    <TextBlock x:Name="TxtJitterAvg" Text="— ms" FontSize="9.5" FontWeight="SemiBold" Foreground="#38BDF8" Margin="0,0,10,0"/>
+                                                    <TextBlock Text="Max: " FontSize="9.5" Foreground="#64748B"/>
+                                                    <TextBlock x:Name="TxtJitterMax" Text="— ms" FontSize="9.5" FontWeight="SemiBold" Foreground="#F59E0B"/>
+                                                </StackPanel>
+                                                <TextBlock Text="Letzte 40s (1s Intervall)" FontSize="9" Foreground="#64748B" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- CARD: TIMER RESOLUTION SWEET-SPOT BENCHMARK (SWIFTYPOP ALGORITHMUS) -->
+                        <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,0,0,16">
+                            <StackPanel>
+                                <!-- HEADER -->
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                     <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center">
+                                         <Border Style="{StaticResource IconBoxBorder}">
+                                             <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE734;"/>
+                                         </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="Timer Resolution Sweet-Spot Benchmark" FontSize="14.5" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,2"/>
+                                            <TextBlock Text="Ermittelt die hardware-optimale Kernel-Timer-Auflösung mit minimalem Jitter &amp; Schlaflatenz" FontSize="11" Foreground="#64748B"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button x:Name="BtnStartTimerBenchmark" Content="🚀 Benchmark starten" Style="{StaticResource SuccessBtn}" Height="30" FontSize="11" FontWeight="SemiBold" Padding="14,2"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- SEPARATOR -->
+                                <Border Style="{StaticResource SeparatorLine}" Margin="0,0,0,12"/>
+
+                                <!-- CONFIG & PARAMETERS -->
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- INPUT FIELDS & PRESET SHORTCUTS -->
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <!-- Start Value -->
+                                        <TextBlock Text="Start:" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <Border Background="#0E1118" BorderBrush="#1F2433" BorderThickness="1" CornerRadius="6" Padding="6,2" Margin="0,0,8,0">
+                                            <TextBox x:Name="TxtBenchStart" Text="0.5000" Width="46" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Increment Value -->
+                                        <TextBlock Text="Schritt:" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <Border Background="#0E1118" BorderBrush="#1F2433" BorderThickness="1" CornerRadius="6" Padding="6,2" Margin="0,0,8,0">
+                                            <TextBox x:Name="TxtBenchStep" Text="0.0050" Width="46" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- End Value -->
+                                        <TextBlock Text="Ende:" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <Border Background="#0E1118" BorderBrush="#1F2433" BorderThickness="1" CornerRadius="6" Padding="6,2" Margin="0,0,8,0">
+                                            <TextBox x:Name="TxtBenchEnd" Text="0.5300" Width="46" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Sample Value -->
+                                        <TextBlock Text="Samples:" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <Border Background="#0E1118" BorderBrush="#1F2433" BorderThickness="1" CornerRadius="6" Padding="6,2" Margin="0,0,8,0">
+                                            <TextBox x:Name="TxtBenchSamples" Text="450" Width="34" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Passes Value (Multi-Pass Konsens) -->
+                                        <TextBlock Text="Durchläufe:" FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                        <Border Background="#0E1118" BorderBrush="#1F2433" BorderThickness="1" CornerRadius="6" Padding="6,2">
+                                            <TextBox x:Name="TxtBenchPasses" Text="3" Width="24" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontFamily="Consolas, Courier New, monospace" FontSize="11" TextAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <!-- CALCULATED STATS BADGE (Iterations) -->
+                                    <Border Grid.Column="1" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="6" Padding="10,4" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="📊 " FontSize="11" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtBenchCalculatedIterations" Text="5 Schritte × 3 Durchläufe (15 Runs)" FontSize="11" FontWeight="SemiBold" Foreground="#38BDF8" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!-- PROGRESS / STATUS -->
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Margin="0,0,0,4">
+                                        <TextBlock x:Name="TxtBenchStatus" Text="Bereit für Benchmark" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="TxtBenchProgressPercent" Text="0%" FontSize="10.5" FontWeight="SemiBold" Foreground="#38BDF8" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <ProgressBar Grid.Row="1" x:Name="ProgressBench" Height="5" Minimum="0" Maximum="100" Value="0" Background="#161B26" Foreground="#38BDF8" BorderThickness="0"/>
+                                </Grid>
+
+                                <!-- BENCHMARK RESULT BANNER (COLLAPSED BY DEFAULT) -->
+                                <Border x:Name="BorderBenchResult" Background="#0C2318" BorderBrush="#10B981" BorderThickness="1.2" CornerRadius="8" Padding="14,10" Margin="0,0,0,12" Visibility="Collapsed">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="🏆" FontSize="20" VerticalAlignment="Center" Margin="0,0,12,0"/>
+
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="OPTIMALER TIMER GEFUNDEN: " FontSize="11" FontWeight="Bold" Foreground="#34D399"/>
+                                                <TextBlock x:Name="TxtBenchOptimalRes" Text="0.5000 ms" FontSize="12.5" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                            </StackPanel>
+                                            <TextBlock x:Name="TxtBenchOptimalStats" Text="Bester Durchschnitts-Jitter: +0.0384 ms | STDEV: 0.0042 ms" FontSize="10.5" Foreground="#94A3B8"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <!-- TOP 1 -->
+                                            <Border x:Name="BorderBenchTop1" Background="#132B20" BorderBrush="#10B981" BorderThickness="1" CornerRadius="6" Padding="8,4" Margin="0,0,8,0">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock Text="⭐ Top 1:" FontSize="11" FontWeight="Bold" Foreground="#FBBF24" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBlock x:Name="TxtBenchTop1Res" Text="0.5050 ms" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                                    <Button x:Name="BtnApplyTop1" Content="Setzen" Style="{StaticResource SuccessBtn}" Height="22" FontSize="10" FontWeight="Bold" Padding="8,0"/>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- TOP 2 -->
+                                            <Border x:Name="BorderBenchTop2" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="6" Padding="8,4" Margin="0,0,8,0">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock Text="Top 2:" FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBlock x:Name="TxtBenchTop2Res" Text="0.5100 ms" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                                    <Button x:Name="BtnApplyTop2" Content="Setzen" Style="{StaticResource SecondaryBtn}" Height="22" FontSize="10" FontWeight="SemiBold" Padding="8,0"/>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- TOP 3 -->
+                                            <Border x:Name="BorderBenchTop3" Background="#0F172A" BorderBrush="#1E293B" BorderThickness="1" CornerRadius="6" Padding="8,4">
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                    <TextBlock Text="Top 3:" FontSize="11" FontWeight="SemiBold" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBlock x:Name="TxtBenchTop3Res" Text="0.5200 ms" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                                    <Button x:Name="BtnApplyTop3" Content="Setzen" Style="{StaticResource SecondaryBtn}" Height="22" FontSize="10" FontWeight="SemiBold" Padding="8,0"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <!-- RESULTS LOG TABLE -->
+                                <Border Background="#080A0F" CornerRadius="8" BorderBrush="#1A1F2C" BorderThickness="1.2" Padding="10,8" Height="140">
+                                    <ScrollViewer x:Name="ScrollBenchResults" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                        <TextBox x:Name="TxtBenchResultsLog" 
+                                                 Background="Transparent" 
+                                                 Foreground="#F1F5F9" 
+                                                 BorderThickness="0" 
+                                                 FontFamily="Consolas, Courier New, monospace" 
+                                                 FontSize="10.5" 
+                                                 IsReadOnly="True" 
+                                                 TextWrapping="NoWrap" 
+                                                 IsUndoEnabled="False"
+                                                 AcceptsReturn="True"
+                                                 Text="Benchmark-Protokoll: Klicke auf '🚀 Benchmark starten', um den Sweet-Spot zu ermitteln."/>
+                                    </ScrollViewer>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

@@ -1,0 +1,274 @@
+            <Border x:Name="TabContentUsbDirect" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <Grid Margin="30,18,18,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <StackPanel Grid.Row="0" Margin="0,0,0,14">
+                        <TextBlock Text="USB-Topologie &amp; CPU-Direct Analyzer" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                        <TextBlock Text="Ermittelt die Chip-Distanz zwischen Peripherie (Maus, Tastatur) und der CPU. Weniger Chips = weniger Latenz." Style="{StaticResource TabHeaderSubtitle}" Margin="0,4,0,0"/>
+                    </StackPanel>
+
+                    <!-- LEGEND & INFO CARD -->
+                    <Border Grid.Row="1" Style="{StaticResource CardBorder}" Padding="16" Margin="0,0,0,14">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 0 CHIPS -->
+                                <Border Grid.Column="0" Background="#10231B" BorderBrush="#1B4D36" BorderThickness="1" CornerRadius="8" Padding="12,10">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                            <Border Background="#34D399" CornerRadius="3" Padding="5,1" Margin="0,0,6,0">
+                                                <TextBlock Text="0 CHIPS" FontSize="9.5" FontWeight="Bold" Foreground="#0A1E14"/>
+                                            </Border>
+                                            <TextBlock Text="Direct to CPU" FontSize="11.5" FontWeight="Bold" Foreground="#34D399"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Gerät ─── [CPU]" FontSize="11" FontFamily="Consolas" Foreground="#94A3B8"/>
+                                        <TextBlock Text="Niedrigste Latenz · Direkte Prozessor-Lanes" FontSize="10.5" Foreground="#64748B" Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- 1 CHIP -->
+                                <Border Grid.Column="2" Background="#261E14" BorderBrush="#4D3B1C" BorderThickness="1" CornerRadius="8" Padding="12,10">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                            <Border Background="#F59E0B" CornerRadius="3" Padding="5,1" Margin="0,0,6,0">
+                                                <TextBlock Text="1 CHIP" FontSize="9.5" FontWeight="Bold" Foreground="#1E1408"/>
+                                            </Border>
+                                            <TextBlock Text="Via Chipsatz" FontSize="11.5" FontWeight="Bold" Foreground="#F59E0B"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Gerät ─[CHIPSATZ]─ [CPU]" FontSize="11" FontFamily="Consolas" Foreground="#94A3B8"/>
+                                        <TextBlock Text="Leichter Overhead durch PCH/Mainboard-Hub" FontSize="10.5" Foreground="#64748B" Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- 2+ CHIPS -->
+                                <Border Grid.Column="4" Background="#261616" BorderBrush="#4D1F1F" BorderThickness="1" CornerRadius="8" Padding="12,10">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                            <Border Background="#EF4444" CornerRadius="3" Padding="5,1" Margin="0,0,6,0">
+                                                <TextBlock Text="2+ CHIPS" FontSize="9.5" FontWeight="Bold" Foreground="#1E0A0A"/>
+                                            </Border>
+                                            <TextBlock Text="Via USB-Hub" FontSize="11.5" FontWeight="Bold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Gerät ─[HUB]─[CHIPSATZ]─ [CPU]" FontSize="11" FontFamily="Consolas" Foreground="#94A3B8"/>
+                                        <TextBlock Text="Höhere Latenz durch Hubs / Monitor-Ports" FontSize="10.5" Foreground="#64748B" Margin="0,2,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+
+                            <TextBlock Grid.Row="1" Text="💡 Tipp: Stecke deine Gaming-Maus oder Tastatur an verschiedene USB-Ports deines Mainboards um und klicke auf 'Neu starten', um den direkten 0-Chip-Port zu finden!" 
+                                       FontSize="11" Foreground="#94A3B8" Margin="0,10,0,0"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- CONTROLS TOOLBAR -->
+                    <Border Grid.Row="2" Background="#12151D" CornerRadius="10" BorderBrush="#1F2430" BorderThickness="1.2" Padding="12,10" Margin="0,0,0,12">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- ACTION BUTTONS -->
+                            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                <Button x:Name="BtnUsbRun" Style="{StaticResource PrimaryBtn}" Height="32" Padding="14,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="TxtUsbRunIcon" Text="▶ " FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtUsbRunLabel" Text="Analyse starten" FontSize="11.5" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- STATUS PILL -->
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0">
+                                <Border x:Name="PillUsbStatus" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="4" Padding="8,3">
+                                    <TextBlock x:Name="TxtPillUsbStatus" Text="BEREIT" FontSize="10" FontWeight="Bold" Foreground="#94A3B8"/>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- UTILITY BUTTONS -->
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <Button x:Name="BtnUsbCopy" Content="📋 Kopieren" Style="{StaticResource SecondaryBtn}" Height="32" Padding="12,0" FontSize="11" Margin="0,0,8,0"/>
+                                <Button x:Name="BtnUsbClear" Content="🗑 Leeren" Style="{StaticResource SecondaryBtn}" Height="32" Padding="12,0" FontSize="11"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- SPLIT VIEW: TERMINAL OUTPUT (LEFT) & HARDWARE TOPOLOGY OVERVIEW (RIGHT) -->
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT: TERMINAL OUTPUT BOX -->
+                        <Border Grid.Column="0" Background="#0B0E14" CornerRadius="10" BorderBrush="#1F2430" BorderThickness="1.2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- CONSOLE TITLE BAR -->
+                                <Border Grid.Row="0" Background="#10131B" BorderBrush="#1C2230" BorderThickness="0,0,0,1" CornerRadius="10,10,0,0" Padding="14,8">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Width="7" Height="7" CornerRadius="3.5" Background="#10B981" Margin="0,0,8,0"/>
+                                            <TextBlock Text="Live-Terminal &amp; Konsolen-Log" FontSize="11.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                        </StackPanel>
+                                        <TextBlock Text="Native PnP Engine" FontSize="10.5" Foreground="#64748B" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Consolas"/>
+                                    </Grid>
+                                </Border>
+
+                                <RichTextBox Grid.Row="1" x:Name="TxtUsbConsoleOutput"
+                                             Background="Transparent"
+                                             Foreground="#F1F5F9"
+                                             FontFamily="Consolas, Lucida Console, Courier New"
+                                             FontSize="11.5"
+                                             IsReadOnly="True"
+                                             BorderThickness="0"
+                                             Padding="14,10"
+                                             VerticalScrollBarVisibility="Auto"
+                                             HorizontalScrollBarVisibility="Auto"
+                                             SelectionBrush="#38BDF8">
+                                    <FlowDocument PagePadding="0">
+                                        <Paragraph x:Name="ParaUsbConsoleOutput" Margin="0" LineHeight="19">
+                                            <Run Text="Klicke auf 'Analyse starten', um die USB-Latenz und Topologie deiner angeschlossenen Geräte zu scannen..." Foreground="#94A3B8"/>
+                                            <LineBreak/>
+                                            <Run Text="Nativer USB PnP &amp; Controller Topologie-Scan (100% offline, kein externer Download)" Foreground="#64748B"/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                            </Grid>
+                        </Border>
+
+                        <!-- RIGHT: STRUCTURED HARDWARE TOPOLOGY OVERVIEW -->
+                        <Border Grid.Column="2" Background="#0C0E15" CornerRadius="10" BorderBrush="#1F2430" BorderThickness="1.2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- OVERVIEW TITLE BAR -->
+                                <Border Grid.Row="0" Background="#10131B" BorderBrush="#1C2230" BorderThickness="0,0,0,1" CornerRadius="10,10,0,0" Padding="14,8">
+                                    <Grid>
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="⚡ " FontSize="12" Foreground="#38BDF8"/>
+                                            <TextBlock Text="Hardware-Anbindung &amp; Latenz-Pfade" FontSize="11.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                        </StackPanel>
+                                        <Border Background="#181D29" BorderBrush="#252D3D" BorderThickness="1" CornerRadius="8" Padding="7,2" HorizontalAlignment="Right">
+                                            <TextBlock x:Name="TxtUsbDeviceCount" Text="0 Geräte" FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- SCROLLABLE HARDWARE LIST -->
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,4,0">
+                                    <StackPanel Margin="14,12,10,16">
+                                        <!-- PLACEHOLDER BEFORE SCAN -->
+                                        <Border x:Name="PanelUsbHardwareEmpty" Background="#10131C" CornerRadius="8" BorderBrush="#1A202E" BorderThickness="1" Padding="20" Margin="0,16,0,0">
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <TextBlock Text="🔍" FontSize="26" Foreground="#FFFFFF" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                                <TextBlock Text="Noch keine Hardware analysiert" FontSize="12.5" FontWeight="Bold" Foreground="#CBD5E1" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Klicke auf 'Analyse starten', um alle USB-Geräte automatisch nach CPU-Direktanbindung, Chipsatz und Hub-Latenz aufzuschlüsseln." FontSize="11" Foreground="#64748B" TextWrapping="Wrap" TextAlignment="Center" Margin="0,4,0,0" LineHeight="16"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <!-- ACTIVE CARDS CONTAINER -->
+                                        <StackPanel x:Name="PanelUsbHardwareContent" Visibility="Collapsed">
+                                            <!-- SECTION 1: 0 CHIPS (DIRECT TO CPU) -->
+                                            <Border Background="#0E1A15" BorderBrush="#164E33" BorderThickness="1.2" CornerRadius="8" Padding="12" Margin="0,0,0,12">
+                                                <StackPanel>
+                                                    <Grid Margin="0,0,0,8">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <Border Width="20" Height="20" CornerRadius="4" Background="#10B981" Margin="0,0,8,0">
+                                                                <TextBlock Text="⚡" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <TextBlock Text="Direkt mit CPU verbunden" FontSize="12" FontWeight="Bold" Foreground="#34D399"/>
+                                                        </StackPanel>
+                                                        <Border Background="#132B20" CornerRadius="4" Padding="6,1" HorizontalAlignment="Right">
+                                                            <TextBlock Text="0 CHIPS · MIN. LATENZ" FontSize="9.5" FontWeight="Bold" Foreground="#34D399"/>
+                                                        </Border>
+                                                    </Grid>
+                                                    <TextBlock Text="Direkte CPU-Lanes ohne Zwischen-Controller. Höchste Signalpriorität &amp; geringste Latenz." FontSize="10.5" Foreground="#64748B" Margin="0,0,0,8"/>
+
+                                                    <!-- DYNAMIC LIST FOR CHIP 0 -->
+                                                    <StackPanel x:Name="StackUsbDevicesChip0">
+                                                        <TextBlock Text="Keine Geräte angebunden" Foreground="#475569" FontSize="11" FontStyle="Italic"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- SECTION 2: 1 CHIP (VIA CHIPSET) -->
+                                            <Border Background="#1E1911" BorderBrush="#4A3414" BorderThickness="1.2" CornerRadius="8" Padding="12" Margin="0,0,0,12">
+                                                <StackPanel>
+                                                    <Grid Margin="0,0,0,8">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <Border Width="20" Height="20" CornerRadius="4" Background="#F59E0B" Margin="0,0,8,0">
+                                                                <TextBlock Text="⚙" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <TextBlock Text="Über Mainboard-Chipsatz (PCH)" FontSize="12" FontWeight="Bold" Foreground="#FBBF24"/>
+                                                        </StackPanel>
+                                                        <Border Background="#2B2113" CornerRadius="4" Padding="6,1" HorizontalAlignment="Right">
+                                                            <TextBlock Text="1 CHIP · MODERATER OVERHEAD" FontSize="9.5" FontWeight="Bold" Foreground="#FBBF24"/>
+                                                        </Border>
+                                                    </Grid>
+                                                    <TextBlock Text="Läuft über den Chipsatz-Bus (DMI/PCIe zur CPU). Leichte Latenz, ideal für Audio, Headsets &amp; RGB." FontSize="10.5" Foreground="#64748B" Margin="0,0,0,8"/>
+
+                                                    <!-- DYNAMIC LIST FOR CHIP 1 -->
+                                                    <StackPanel x:Name="StackUsbDevicesChip1">
+                                                        <TextBlock Text="Keine Geräte angebunden" Foreground="#475569" FontSize="11" FontStyle="Italic"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+
+                                            <!-- SECTION 3: 2+ CHIPS (VIA USB-HUB) -->
+                                            <Border Background="#1C1113" BorderBrush="#4D1D24" BorderThickness="1.2" CornerRadius="8" Padding="12">
+                                                <StackPanel>
+                                                    <Grid Margin="0,0,0,8">
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                            <Border Width="20" Height="20" CornerRadius="4" Background="#EF4444" Margin="0,0,8,0">
+                                                                <TextBlock Text="🔗" FontSize="11" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <TextBlock Text="Über USB-Hub / Daisy-Chain" FontSize="12" FontWeight="Bold" Foreground="#F87171"/>
+                                                        </StackPanel>
+                                                        <Border Background="#2B1316" CornerRadius="4" Padding="6,1" HorizontalAlignment="Right">
+                                                            <TextBlock Text="2+ CHIPS · HÖHERE LATENZ" FontSize="9.5" FontWeight="Bold" Foreground="#F87171"/>
+                                                        </Border>
+                                                    </Grid>
+                                                    <TextBlock Text="Signal muss zusätzliche Hubs passieren. Für Gaming-Mäuse &amp; Tastaturen umstecken auf CPU-Port!" FontSize="10.5" Foreground="#64748B" Margin="0,0,0,8"/>
+
+                                                    <!-- DYNAMIC LIST FOR CHIP 2+ -->
+                                                    <StackPanel x:Name="StackUsbDevicesChip2">
+                                                        <TextBlock Text="Keine Geräte angebunden" Foreground="#475569" FontSize="11" FontStyle="Italic"/>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>

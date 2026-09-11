@@ -1,0 +1,258 @@
+        <!-- ========================================================================= -->
+        <!-- HARDWARE DETAILS MODAL OVERLAY (DYNAMIC HARDWARE TELEMETRY) -->
+        <!-- ========================================================================= -->
+        <Grid x:Name="OverlayHardwareDetails" Grid.ColumnSpan="2" Background="#D907090E" Panel.ZIndex="1000" Visibility="Collapsed">
+            <Border Width="700" MaxHeight="620" Style="{StaticResource ModalContainerBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid Grid.Row="0" Margin="0,0,0,18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource ModalIconBox}">
+                            <TextBlock x:Name="TxtHwDetailIcon" Text="⚡" FontSize="19" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtHwDetailTitle" Text="Hardware Details" Style="{StaticResource ModalTitleText}"/>
+                            <TextBlock x:Name="TxtHwDetailSubtitle" Text="Live Sensor Telemetrie" Style="{StaticResource ModalSubtitleText}"/>
+                        </StackPanel>
+                        <Button x:Name="BtnCloseHwDetails" Grid.Column="2" Content="✕" Style="{StaticResource WinCloseBtn}" Width="32" Height="32" FontSize="14" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <!-- CONTENT CONTAINER (DYNAMIC METRIC TILES) -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="430" Margin="0,0,0,16">
+                        <WrapPanel x:Name="PanelHwDetailMetrics" Margin="-4,0,-4,0"/>
+                    </ScrollViewer>
+
+                    <!-- FOOTER -->
+                    <Border Grid.Row="2" BorderBrush="#1C212D" BorderThickness="0,1,0,0" Padding="0,14,0,0">
+                        <Grid>
+                            <Button x:Name="BtnDismissHwDetails" HorizontalAlignment="Right" Content="Schließen" Style="{StaticResource SecondaryBtn}" Height="30" Padding="18,4" FontSize="11"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ========================================================================= -->
+        <!-- MODERN IN-APP MODAL / CONFIRMATION DIALOG (KISS DARK THEME) -->
+        <!-- ========================================================================= -->
+        <Grid x:Name="OverlayModal" Grid.ColumnSpan="2" Background="#E607090E" Panel.ZIndex="2000" Visibility="Collapsed">
+            <Border Width="620" Style="{StaticResource ModalContainerBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid Grid.Row="0" Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" x:Name="BorderModalIcon" Style="{StaticResource ModalIconBox}">
+                            <TextBlock x:Name="TxtModalIcon" Text="🔄" FontSize="20" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock x:Name="TxtModalTitle" Text="System-Neustart" Style="{StaticResource ModalTitleText}"/>
+                            <TextBlock x:Name="TxtModalCategory" Text="Znipe Optimization Tool" Style="{StaticResource ModalSubtitleText}"/>
+                        </StackPanel>
+                        <Button x:Name="BtnModalClose" Grid.Column="2" Content="✕" Style="{StaticResource WinCloseBtn}" Width="30" Height="30" FontSize="13" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <!-- MESSAGE BODY -->
+                    <TextBlock Grid.Row="1" x:Name="TxtModalMessage" Text="Möchtest du das System jetzt wirklich neu starten?" TextWrapping="Wrap" FontSize="13" LineHeight="20" Foreground="#CBD5E1" Margin="0,0,0,20"/>
+
+                    <!-- FOOTER ACTIONS -->
+                    <Border Grid.Row="2" BorderBrush="#1C212D" BorderThickness="0,1,0,0" Padding="0,16,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="BtnModalCancel" Content="Abbrechen" Style="{StaticResource SecondaryBtn}" Height="32" Padding="14,0" FontSize="11.5" Margin="0,0,8,0"/>
+                            <Button x:Name="BtnModalCustom" Content="Option" Style="{StaticResource SecondaryBtn}" Height="32" Padding="14,0" FontSize="11.5" Margin="0,0,8,0" Visibility="Collapsed"/>
+                            <Button x:Name="BtnModalConfirm" Content="Bestätigen" Style="{StaticResource PrimaryBtn}" Height="32" Padding="16,0" FontSize="11.5" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ========================================================================= -->
+        <!-- RESTART OPTIONS MODAL OVERLAY -->
+        <!-- ========================================================================= -->
+        <Grid x:Name="OverlayRestartModal" Grid.ColumnSpan="2" Background="#E607090E" Panel.ZIndex="2000" Visibility="Collapsed">
+            <Border Width="500" Style="{StaticResource ModalContainerBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid Grid.Row="0" Margin="0,0,0,18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource ModalIconBox}" BorderBrush="#3B82F6">
+                            <TextBlock Text="🔄" FontSize="20" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="Neustart" Style="{StaticResource ModalTitleText}"/>
+                            <TextBlock Text="Wähle die gewünschte Startart für dein System" Style="{StaticResource ModalSubtitleText}"/>
+                        </StackPanel>
+                        <Button x:Name="BtnRestartModalClose" Grid.Column="2" Content="✕" Style="{StaticResource WinCloseBtn}" Width="30" Height="30" FontSize="13" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <!-- 3 RESTART OPTION CARDS -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,16">
+                        <!-- OPTION 1: NORMAL RESTART -->
+                        <Border x:Name="BtnRestartNormal" Background="#161B26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="10" Padding="14,12" Margin="0,0,0,10" Cursor="Hand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="36" Height="36" CornerRadius="8" Background="#1E2433" BorderBrush="#2C364C" BorderThickness="1" Margin="0,0,12,0">
+                                    <TextBlock Text="🔄" FontSize="16" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="Normaler Neustart" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                    <TextBlock Text="Startet Windows regulär neu. Schneller Standard-Neustart." FontSize="11" Foreground="#94A3B8" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="2" Text="➔" FontSize="14" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- OPTION 2: DIRECT TO BIOS / UEFI -->
+                        <Border x:Name="BtnRestartUefiOption" Background="#161B26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="10" Padding="14,12" Margin="0,0,0,10" Cursor="Hand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="36" Height="36" CornerRadius="8" Background="#1E2433" BorderBrush="#2C364C" BorderThickness="1" Margin="0,0,12,0">
+                                    <TextBlock Text="⚙️" FontSize="16" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="Direkt ins UEFI / BIOS booten" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                    <TextBlock Text="Startet den PC neu und ruft automatisch das Mainboard-BIOS auf." FontSize="11" Foreground="#94A3B8" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="2" Text="➔" FontSize="14" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- OPTION 3: SAFE MODE -->
+                        <Border x:Name="BtnRestartSafeMode" Background="#161B26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="10" Padding="14,12" Cursor="Hand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Width="36" Height="36" CornerRadius="8" Background="#1E2433" BorderBrush="#2C364C" BorderThickness="1" Margin="0,0,12,0">
+                                    <TextBlock Text="🛡️" FontSize="16" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="Abgesicherter Modus (Safe Mode)" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC"/>
+                                    <TextBlock Text="Startet mit minimalen Treibern (ideal für DDU oder Fehlerbehebung)." FontSize="11" Foreground="#94A3B8" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="2" Text="➔" FontSize="14" FontWeight="Bold" Foreground="#64748B" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- FOOTER ACTIONS -->
+                    <Border Grid.Row="2" BorderBrush="#1C212D" BorderThickness="0,1,0,0" Padding="0,14,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="BtnRestartModalCancel" Content="Abbrechen" Style="{StaticResource SecondaryBtn}" Height="32" Padding="18,0" FontSize="11.5"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ========================================================================= -->
+        <!-- GPU LIMITS / DROSSEL MODAL OVERLAY -->
+        <!-- ========================================================================= -->
+        <Grid x:Name="OverlayGpuLimitsModal" Grid.ColumnSpan="2" Background="#E607090E" Panel.ZIndex="2000" Visibility="Collapsed">
+            <Border Width="540" Style="{StaticResource ModalContainerBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid Grid.Row="0" Margin="0,0,0,18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource ModalIconBox}" BorderBrush="#38BDF8">
+                            <TextBlock Text="⚡" FontSize="20" Foreground="#38BDF8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="GPU Clock Lock" Style="{StaticResource ModalTitleText}"/>
+                            <TextBlock Text="NVIDIA Core-Takt fest arretieren (Anti-Jitter &amp; stabile Frametimes)" Style="{StaticResource ModalSubtitleText}"/>
+                        </StackPanel>
+                        <Button x:Name="BtnCloseGpuLimitsModal" Grid.Column="2" Content="✕" Style="{StaticResource WinCloseBtn}" Width="30" Height="30" FontSize="13" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <!-- BODY: CLOCK TARGET -->
+                    <StackPanel Grid.Row="1" Margin="0,0,0,16">
+                        <!-- TARGET CARD -->
+                        <Border Background="#161B26" BorderBrush="#262D3D" BorderThickness="1" CornerRadius="10" Padding="16,14" Margin="0,0,0,12">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,10">
+                                    <TextBlock Text="GPU KERNTATKT (CORE CLOCK)" FontSize="11" FontWeight="Bold" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                    <TextBlock x:Name="TxtGpuClockTargetVal" Text="750 MHz" FontSize="16" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <Slider x:Name="SliderGpuClock" Minimum="500" Maximum="3165" SmallChange="25" LargeChange="100" Margin="0,4,0,4"/>
+
+                                <Grid Margin="0,4,0,0">
+                                    <TextBlock x:Name="TxtGpuClockTargetRange" Text="Bereich: Min 500 MHz – Max 3165 MHz" FontSize="10" Foreground="#64748B"/>
+                                    <TextBlock x:Name="TxtGpuClockCurrentInfo" Text="Aktuell: 750 MHz" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- INFO HINT BOX -->
+                        <Border Background="#121620" BorderBrush="#1F2637" BorderThickness="1" CornerRadius="8" Padding="12,10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="🛡️" FontSize="14" Foreground="#38BDF8" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                                <TextBlock Text="Arretiert den Core-Takt per nvidia-smi -lgc auf einen festen Wert. Eliminiert dynamisches Taktspringen, Spannungs-Hunting und Frametime-Spikes. Der Daemon stellt den Takt nach jedem Windows-Start automatisch wieder her." TextWrapping="Wrap" FontSize="11" LineHeight="16" Foreground="#94A3B8" MaxWidth="440"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- FOOTER ACTIONS -->
+                    <Border Grid.Row="2" BorderBrush="#1C212D" BorderThickness="0,1,0,0" Padding="0,14,0,0">
+                        <Grid>
+                            <Button x:Name="BtnResetGpuLimits" Content="↺ Dynamisch (Reset)" Style="{StaticResource PrimaryBtn}" Height="32" Padding="14,0" FontSize="11" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="BtnCancelGpuLimits" Content="Abbrechen" Style="{StaticResource SecondaryBtn}" Height="32" Padding="18,0" FontSize="11.5" Margin="0,0,10,0"/>
+                                <Button x:Name="BtnApplyGpuLimits" Content="Takt arretieren" Style="{StaticResource SuccessBtn}" Height="32" Padding="20,0" FontSize="11.5" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+

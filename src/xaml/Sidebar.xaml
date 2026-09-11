@@ -1,0 +1,214 @@
+        <!-- ========================================================================= -->
+        <!-- LEFT SIDEBAR NAVIGATION (COLUMN 0) -->
+        <!-- ========================================================================= -->
+        <Border Grid.Column="0" Background="#0E1015" BorderBrush="#181B22" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- TOP BRAND / LOGO & DRAG AREA -->
+                <Border x:Name="SidebarTopDragArea" Grid.Row="0" Background="Transparent">
+                    <StackPanel x:Name="SidebarBrandHeader" Background="Transparent" Margin="16,14,16,16" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border Width="36" Height="36" Background="#161922" CornerRadius="9" BorderBrush="#E11D48" BorderThickness="1.5" Margin="0,0,10,0" ClipToBounds="True">
+                            <Image x:Name="ImgHeaderLogo" Stretch="Uniform" Margin="4"/>
+                        </Border>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Znipe" FontSize="16" FontWeight="Bold" Foreground="#FFFFFF"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- SCROLLABLE SIDEBAR CATEGORIES & ITEMS -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,8">
+                    <StackPanel Margin="0,6,0,0">
+                        <RadioButton x:Name="TabBtnHome" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}" IsChecked="True">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="🏠 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Performance" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabHome" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="GPU-Drossel / Hintergrund-Dienst aktiv">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnHardwareInfo" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="🖥️ " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Hardware-Info" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnDrives" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="💾 " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Laufwerke" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnBufferbloat" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="📶 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Bufferbloat &amp; Speed" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabBufferbloat" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="Bufferbloat- / Speedtest läuft...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnMouse" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="⚙️ " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Allgemeine Tweaks" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnTimerRes" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="⏱️ " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Timer Resolution" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnBcd" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="⏰ " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="HPET &amp; Timers" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnOffice" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="📄 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Microsoft Office" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabOffice" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="Office Download / Installation läuft...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+
+                        <RadioButton x:Name="TabBtnChipset" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="⚡ " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Chipset" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabChipset" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="Chipset Download läuft...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnGamebar" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="🎮 " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Spielprofile" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnApps" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="📦 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Software &amp; Tools" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabApps" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="Software Download / Installation läuft...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnUpdates" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="🔄 " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="Updates" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnBios" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="💻 " FontSize="12" VerticalAlignment="Center"/>
+                                <TextBlock Text="BIOS &amp; UEFI" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnUsbDirect" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="🔌 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="USB-Topologie" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabUsbDirect" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="USB-Topologie Analyse läuft...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+
+                        <RadioButton x:Name="TabBtnAioCooler" GroupName="SidebarTabs" Style="{StaticResource SidebarNavRadio}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="💧 " FontSize="12" VerticalAlignment="Center"/>
+                                    <TextBlock Text="AiO" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Viewbox x:Name="SpinnerTabAioCooler" Width="13" Height="13" HorizontalAlignment="Right" Margin="0,0,4,0"
+                                         Style="{StaticResource SpinningIndicatorStyle}" Visibility="Collapsed"
+                                         ToolTip="AIO-Status wird aktualisiert...">
+                                    <Canvas Width="16" Height="16">
+                                        <Path Stroke="#38BDF8" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                              Data="M 8,2 A 6,6 0 1 1 2,8" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Grid>
+                        </RadioButton>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- BOTTOM COPYRIGHT / LICENSE INFO (ROW 2) -->
+                <Border Grid.Row="2" Background="#10131A" BorderBrush="#1C2230" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="12,0,12,32">
+                    <StackPanel>
+                        <TextBlock Text="© 2026 Xhemajl Dvorani" FontSize="11.5" FontWeight="Bold" Foreground="#E2E8F0" Margin="0,0,0,3"/>
+                        <TextBlock Text="Alle Rechte vorbehalten. Diese Software ist privates geistiges Eigentum des Urhebers. Bereitstellung erfolgt unter Nutzungslizenz. Kein Eigentumsübertrag. Lizenz jederzeit ohne Vorankündigung widerrufbar."
+                                   FontSize="10" Foreground="#64748B" TextWrapping="Wrap" LineHeight="14.5"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>

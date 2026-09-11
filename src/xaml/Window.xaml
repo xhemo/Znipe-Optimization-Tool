@@ -1,0 +1,62 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Znipe Optimization Tool" 
+    Height="940" Width="1500" 
+    MinHeight="500" MinWidth="580"
+    WindowState="Normal"
+    WindowStyle="SingleBorderWindow"
+    AllowsTransparency="False"
+    ResizeMode="CanResize"
+    WindowStartupLocation="Manual"
+    Background="#0B0D11"
+    FontFamily="Segoe UI Variable Display, Segoe UI, Arial"
+    UseLayoutRounding="True"
+    SnapsToDevicePixels="True"
+    TextOptions.TextFormattingMode="Display"
+    TextOptions.TextRenderingMode="ClearType">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0" UseAeroCaptionButtons="False"/>
+    </WindowChrome.WindowChrome>
+
+    <!-- [INCLUDE:Styles.xaml] -->
+
+    <Grid Background="#0B0D11">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="ColSidebar" Width="240"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- [INCLUDE:Sidebar.xaml] -->
+
+        <!-- MAIN CONTENT AREA (COLUMN 1) -->
+        <Grid Grid.Column="1" Background="#0B0D11">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- [INCLUDE:Header.xaml] -->
+
+            <!-- [INCLUDE:Tabs\Home.xaml] -->
+            <!-- [INCLUDE:Tabs\HardwareInfo.xaml] -->
+            <!-- [INCLUDE:Tabs\Drives.xaml] -->
+            <!-- [INCLUDE:Tabs\Bufferbloat.xaml] -->
+            <!-- [INCLUDE:Tabs\Mouse.xaml] -->
+            <!-- [INCLUDE:Tabs\TimerRes.xaml] -->
+            <!-- [INCLUDE:Tabs\Bcd.xaml] -->
+            <!-- [INCLUDE:Tabs\Office.xaml] -->
+            <!-- [INCLUDE:Tabs\Chipset.xaml] -->
+            <!-- [INCLUDE:Tabs\Gamebar.xaml] -->
+            <!-- [INCLUDE:Tabs\Apps.xaml] -->
+            <!-- [INCLUDE:Tabs\Updates.xaml] -->
+            <!-- [INCLUDE:Tabs\Bios.xaml] -->
+            <!-- [INCLUDE:Tabs\UsbDirect.xaml] -->
+            <!-- [INCLUDE:Tabs\AioCooler.xaml] -->
+        </Grid>
+
+        <!-- [INCLUDE:Modals.xaml] -->
+    </Grid>
+</Window>

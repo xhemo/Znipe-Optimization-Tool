@@ -1,0 +1,136 @@
+            <Border x:Name="TabContentAioCooler" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- HEADER -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="AiO" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Intuitive Echtzeit-Vorschau und native Direktsteuerung für das runde Display deiner NZXT Kraken Elite." Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- 1. KRAKEN CIRCULAR DISPLAY HERO CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="24,20" Margin="0,0,0,14">
+                            <StackPanel HorizontalAlignment="Center">
+                                
+                                <!-- THE CIRCULAR LCD DISPLAY WIDGET -->
+                                <Grid Width="260" Height="260" Margin="0,4,0,16" x:Name="BorderAioScreenOuter" Background="Transparent">
+                                    <!-- Outer Casing Ring (Metallic / Dark) -->
+                                    <Border CornerRadius="130" Background="#0A0F1D" BorderBrush="#1E293B" BorderThickness="4">
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="#38BDF8" BlurRadius="25" ShadowDepth="0" Opacity="0.18"/>
+                                        </Border.Effect>
+                                    </Border>
+
+                                    <!-- Inner Bezel Ring (Kraken Accent) -->
+                                    <Border Margin="8" CornerRadius="122" BorderBrush="#38BDF8" BorderThickness="1.5" Background="#030712">
+                                        <!-- Circular Display Viewport with Ellipse Clip -->
+                                        <Grid Width="242" Height="242" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Grid.Clip>
+                                                <EllipseGeometry Center="121,121" RadiusX="121" RadiusY="121"/>
+                                            </Grid.Clip>
+
+                                            <!-- Live Display Image / Animated GIF Element -->
+                                            <Image x:Name="ImgAioDisplayPreview" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                                                <Image.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform x:Name="ScaleAioPreview" ScaleX="1" ScaleY="1"/>
+                                                        <TranslateTransform x:Name="TranslateAioPreview" X="0" Y="0"/>
+                                                        <RotateTransform x:Name="RotateAioPreview" Angle="0"/>
+                                                    </TransformGroup>
+                                                </Image.RenderTransform>
+                                            </Image>
+
+                                            <!-- Default Placeholder State (Idle Liquid Sensor Mode) -->
+                                            <StackPanel x:Name="PanelAioPlaceholder" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <Border Width="46" Height="46" CornerRadius="23" Background="#101E2E" BorderBrush="#1E3A5F" BorderThickness="1" Margin="0,0,0,8" HorizontalAlignment="Center">
+                                                    <TextBlock Text="💧" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <TextBlock x:Name="TxtAioCircleTemp" Text="-- °C" FontSize="26" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Center"/>
+                                                <TextBlock Text="Kühlmittel-Temperatur" FontSize="11" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                                <!-- PRIMARY ACTION BUTTONS -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
+                                    <Button x:Name="BtnAioSelectFile" Content="📁 Bild / GIF wählen..." Style="{StaticResource SuccessBtn}" Height="36" Padding="18,0" FontWeight="SemiBold" Margin="0,0,10,0"/>
+                                    <Button x:Name="BtnAioRotateStep" Content="↻ 90° Drehen" Style="{StaticResource SecondaryBtn}" Height="36" Padding="14,0" ToolTip="Dreht die Anzeige um 90° weiter" Margin="0,0,10,0"/>
+                                    <Button x:Name="BtnAioResetLiquidMode" Content="🔄 Standard" Style="{StaticResource SecondaryBtn}" Height="36" Padding="14,0" ToolTip="Setzt das Display auf die Standard-Temperaturanzeige zurück"/>
+                                </StackPanel>
+
+                                <!-- PROGRESS BAR -->
+                                <StackPanel MaxWidth="500" HorizontalAlignment="Center" Margin="0,2,0,0">
+                                    <ProgressBar x:Name="ProgressBarAioUpload" Height="8" Width="360" Minimum="0" Maximum="100" Value="0" Background="#1A202C" Foreground="#38BDF8" Visibility="Collapsed" Margin="0,0,0,6"/>
+                                    <TextBlock x:Name="TxtAioUploadProgress" Visibility="Collapsed" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 2. QUICK SETTINGS: LIVE BRIGHTNESS & TELEMETRY -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20,16" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- LIVE BRIGHTNESS SLIDER -->
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                    <Grid Margin="0,0,0,8">
+                                        <TextBlock Text="☀️ Display-Helligkeit (Echtzeit)" FontSize="13" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                        <TextBlock x:Name="TxtAioBrightnessVal" Text="80%" FontSize="13" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                    <Slider x:Name="SliderAioBrightness" Minimum="0" Maximum="100" Value="80" TickFrequency="5" IsSnapToTickEnabled="True" VerticalAlignment="Center"/>
+                                    <TextBlock Text="0% schaltet das Display komplett aus (Stealth Mode). Greift sofort." FontSize="10.5" Foreground="#64748B" Margin="0,6,0,0"/>
+                                </StackPanel>
+
+                                <!-- HARDWARE STATUS PILL & QUICK METRICS -->
+                                <Border Grid.Column="2" Background="#10141D" BorderBrush="#1C2436" BorderThickness="1" CornerRadius="8" Padding="14,10" VerticalAlignment="Center">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                                                <TextBlock x:Name="TxtAioDeviceName" Text="NZXT Kraken Elite" FontSize="12" FontWeight="SemiBold" Foreground="#FFFFFF"/>
+                                                <Border x:Name="PillAioStatus" Background="#132B20" CornerRadius="4" Padding="6,2" Margin="8,0,0,0" VerticalAlignment="Center">
+                                                    <TextBlock x:Name="TxtAioStatusPill" Text="● VERBUNDEN" FontSize="9.5" FontWeight="Bold" Foreground="#34D399"/>
+                                                </Border>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="💧 " FontSize="11" VerticalAlignment="Center"/>
+                                                <TextBlock x:Name="TxtAioLiquidTemp" Text="-- °C" FontSize="12" FontWeight="Bold" Foreground="#38BDF8" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                                <TextBlock Text="🌀 " FontSize="11" VerticalAlignment="Center"/>
+                                                <TextBlock x:Name="TxtAioPumpRpm" Text="-- RPM" FontSize="12" FontWeight="Bold" Foreground="#A78BFA" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Button x:Name="BtnAioRefresh" Grid.Column="1" Content="🔄" Style="{StaticResource SecondaryBtn}" Width="32" Height="32" Padding="0" VerticalAlignment="Center" ToolTip="Telemetrie aktualisieren"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- 3. SAVED MEDIA GALLERY / RECENT GIFS -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20,16" Margin="0,0,0,14">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,12">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock Text="🎞️ Gespeicherte GIFs &amp; Bilder" FontSize="13" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                        <TextBlock x:Name="TxtAioMediaCount" Text="(0)" FontSize="12" Foreground="#64748B" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button x:Name="BtnAioGiphySearch" Content="🌐 GIPHY Suche" Style="{StaticResource SecondaryBtn}" Height="28" Padding="12,0" FontSize="11" Margin="0,0,8,0" ToolTip="Online nach GIFs suchen und direkt auf Display laden"/>
+                                        <Button x:Name="BtnAioOpenMediaFolder" Content="📂 Ordner" Style="{StaticResource SecondaryBtn}" Height="28" Padding="10,0" FontSize="11" Margin="0,0,8,0" ToolTip="Speicherort im Windows Explorer öffnen"/>
+                                        <Button x:Name="BtnAioClearAllMedia" Content="🗑️ Alle löschen" Style="{StaticResource SecondaryBtn}" Height="28" Padding="10,0" FontSize="11" Foreground="#EF4444" ToolTip="Alle gespeicherten GIFs und Bilder restlos löschen"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <WrapPanel x:Name="PanelAioMediaGallery" Margin="-4"/>
+                                <TextBlock x:Name="TxtAioNoMediaHint" Text="Noch keine Medien gespeichert. Ausgewählte GIFs/Bilder werden automatisch gesichert und bleiben auch nach Löschen vom Desktop abrufbar." FontSize="11.5" Foreground="#64748B" Margin="0,4,0,0" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

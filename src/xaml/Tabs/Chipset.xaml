@@ -1,0 +1,176 @@
+            <Border x:Name="TabContentChipset" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- HEADER TITLE & SUBTITLE -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="Chipset" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Automatische Hardware-Erkennung, Live-Versionsabgleich und 1-Klick-Installation" Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- CHIPSET STATUS & VERSION SUMMARY CARD -->
+                        <Border x:Name="BorderChipsetStatus" Background="#162B23" CornerRadius="12" BorderBrush="#10B981" BorderThickness="1.2" Padding="20" Margin="0,0,0,14">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- STATUS HEADER -->
+                                <Grid Grid.Row="0" Margin="0,0,0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock x:Name="TxtChipsetStatusTitle" Text="Prüfe Chipset-Status..." FontWeight="Bold" Foreground="#34D399" FontSize="15"/>
+                                        <TextBlock x:Name="TxtChipsetStatusDesc" Text="Ermittle Hardware-Plattform und Treiberversionen..." Foreground="#A7F3D0" FontSize="11.5" Margin="0,3,0,0"/>
+                                    </StackPanel>
+                                    <Border x:Name="PillChipsetStatus" Grid.Column="1" Background="#064E3B" CornerRadius="4" Padding="10,3" VerticalAlignment="Top">
+                                        <TextBlock x:Name="TxtPillChipset" Text="PRÜFE..." FontSize="10" FontWeight="Bold" Foreground="#34D399"/>
+                                    </Border>
+                                </Grid>
+
+                                <!-- VERSION & HARDWARE DETAILS -->
+                                <Border Grid.Row="1" Background="#0E121A" CornerRadius="8" BorderBrush="#1C2333" BorderThickness="1" Padding="14,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- PLATFORM -->
+                                        <StackPanel Grid.Column="0" Margin="0,0,12,0">
+                                            <TextBlock Text="Hardware-Plattform:" Foreground="#64748B" FontSize="11" FontWeight="SemiBold"/>
+                                            <TextBlock x:Name="TxtChipsetPlatform" Text="Ermittle..." Foreground="#F8FAFC" FontSize="12.5" FontWeight="Bold" Margin="0,3,0,0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+
+                                        <!-- INSTALLED VERSION -->
+                                        <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                                            <TextBlock Text="Installierte Version:" Foreground="#64748B" FontSize="11" FontWeight="SemiBold"/>
+                                            <TextBlock x:Name="TxtChipsetInstalledVer" Text="Ermittle..." Foreground="#38BDF8" FontSize="13" FontWeight="Bold" Margin="0,3,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- LATEST AVAILABLE VERSION -->
+                                        <StackPanel Grid.Column="2">
+                                            <TextBlock Text="Neueste Version (Online):" Foreground="#64748B" FontSize="11" FontWeight="SemiBold"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                                <TextBlock x:Name="TxtChipsetLatestVer" Text="Prüfe Server..." Foreground="#34D399" FontSize="13" FontWeight="Bold"/>
+                                                <TextBlock x:Name="TxtChipsetReleaseDate" Text="" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center" Margin="6,0,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <!-- ACTION BUTTONS BAR & CLEAN INSTALL OPTION -->
+                        <StackPanel Margin="0,0,0,14">
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <Button x:Name="BtnInstallChipsetDriver" Content="🚀 Chipset-Treiber herunterladen &amp; installieren" Style="{StaticResource PrimaryBtn}" Height="36" Padding="16,4" Margin="0,0,8,0"/>
+                                    <Button x:Name="BtnDownloadOnlyChipset" Content="📥 Nur Download" Style="{StaticResource SecondaryBtn}" Height="36" Padding="12,4" Margin="0,0,8,0"/>
+                                    <Button x:Name="BtnCheckChipsetUpdate" Content="🔄 Nach Updates suchen" Style="{StaticResource SecondaryBtn}" Height="36" Padding="12,4"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Button x:Name="BtnOpenChipsetFolder" Content="📁 Download-Ordner" Style="{StaticResource SecondaryBtn}" Height="36" Padding="12,4" Margin="0,0,8,0"/>
+                                    <Button x:Name="BtnOpenDevMgmtChipset" Content="🔧 Geräte-Manager" Style="{StaticResource SecondaryBtn}" Height="36" Padding="12,4"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- CLEAN INSTALL CHECKBOX -->
+                            <CheckBox x:Name="ChkCleanInstallChipset" Content="🗑️ Vor Neuinstallation alte Treiber &amp; DriverStore restlos deinstallieren / bereinigen (Clean Install)" Foreground="#94A3B8" FontSize="11.5" FontWeight="SemiBold" Cursor="Hand" Margin="2,2,0,0"/>
+                        </StackPanel>
+
+                        <!-- DETAILED PROGRESS CARD -->
+                        <Border x:Name="BorderChipsetProgress" Background="#12151D" CornerRadius="10" Padding="14,12" Margin="0,0,0,14" Visibility="Collapsed" BorderBrush="#252C3D" BorderThickness="1.2">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtChipsetProgressStatus" Text="Lade Chipset-Treiber herunter..." FontSize="12.5" FontWeight="Bold" Foreground="#38BDF8"/>
+                                        <TextBlock x:Name="TxtChipsetDownloadSize" Text="" FontSize="11.5" Foreground="#94A3B8" Margin="8,1,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtChipsetDownloadSpeed" Text="" FontSize="11.5" FontWeight="SemiBold" Foreground="#FBBF24" Margin="0,0,10,0"/>
+                                        <TextBlock x:Name="TxtChipsetDownloadPercent" Text="0%" FontSize="12.5" FontWeight="Bold" Foreground="#34D399" Margin="0,0,12,0"/>
+                                        <Button x:Name="BtnCancelChipsetDownload" Content="⏹ Abbrechen" Style="{StaticResource DangerBtn}" Height="24" Padding="8,1" FontSize="10.5"/>
+                                    </StackPanel>
+                                </Grid>
+                                <ProgressBar x:Name="ProgChipsetDownload" Height="8" Background="#181C26" Foreground="#38BDF8" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- DRIVER COMPONENTS LIST -->
+                        <Border Style="{StaticResource CardBorder}" Padding="18">
+                            <StackPanel>
+                                <TextBlock Text="Treiber-Komponenten &amp; Versionen (Live aus dem DriverStore):" FontWeight="Bold" Foreground="#F8FAFC" FontSize="12.5" Margin="0,0,0,12"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="AMD 3D V-Cache Optimizer:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetVcacheVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="PPM Provisioning Driver:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetPpmVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="SMBus Controller Driver:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetSmbusVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="AMD PSP / Intel ME Driver:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetPspVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="GPIO Controller Driver:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetGpioVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="230"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="I2C Controller Driver:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock x:Name="TxtChipsetI2cVer" Grid.Column="1" Text="Prüfe DriverStore..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

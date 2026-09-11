@@ -1,0 +1,296 @@
+            <Border x:Name="TabContentBufferbloat" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- HEADER WITH ACTIONS -->
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- ROW 0, COL 0: TITLE -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Bufferbloat Benchmark" Style="{StaticResource TabHeaderTitle}" Margin="0" VerticalAlignment="Top"/>
+
+                            <!-- ROW 0, COL 1: ACTION BUTTON -->
+                            <Button x:Name="BtnBbStartTest" Grid.Row="0" Grid.Column="1" Content="🚀 Benchmark starten" Style="{StaticResource PrimaryBtn}" Height="34" Padding="16,0" FontSize="11.5" FontWeight="Bold" VerticalAlignment="Top"/>
+
+                            <!-- ROW 1, COL 0: SUBTITLE -->
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="100% physische Leitungs- und Latenzstau-Analyse unter Volllast nach offiziellem Waveform-Verfahren." Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0" VerticalAlignment="Center"/>
+
+                            <!-- ROW 1, COL 1: SELECTORS -->
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,6,0,0">
+                                <TextBlock Text="Server:" FontSize="11.5" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                <ComboBox x:Name="CmbBbTargetServer" Width="185" Height="28" Margin="0,0,12,0" SelectedIndex="0" FontSize="11">
+                                    <ComboBoxItem Content="🌐 Cloudflare (1.1.1.1)" Tag="1.1.1.1"/>
+                                    <ComboBoxItem Content="🌐 Google DNS (8.8.8.8)" Tag="8.8.8.8"/>
+                                    <ComboBoxItem Content="🌐 Quad9 DNS (9.9.9.9)" Tag="9.9.9.9"/>
+                                    <ComboBoxItem Content="🌐 OpenDNS (208.67.222.222)" Tag="208.67.222.222"/>
+                                </ComboBox>
+                                <TextBlock Text="Stresstest-Dauer:" FontSize="11.5" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                <ComboBox x:Name="CmbBbDuration" Width="145" Height="28" SelectedIndex="1" FontSize="11">
+                                    <ComboBoxItem Content="⚡ Schnell (5s)" Tag="5"/>
+                                    <ComboBoxItem Content="⏱️ Standard (10s)" Tag="10"/>
+                                    <ComboBoxItem Content="🔬 Intensiv (20s)" Tag="20"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- TECHNICAL PROGRESS & PHASEN-DOCK MIT WARMUP -->
+                        <Border Background="#0E121A" CornerRadius="12" BorderBrush="#1C2230" BorderThickness="1.2" Padding="16,12" Margin="0,0,0,16">
+                            <StackPanel>
+                                <!-- ROW 0: PHASEN-CHIPS -->
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- CHIP 1: WARMUP & IDLE -->
+                                    <Border x:Name="ChipPhase1" Grid.Column="0" Background="#161B26" BorderBrush="#252D3E" BorderThickness="1" CornerRadius="6" Padding="10,5" Margin="0,0,6,0">
+                                        <TextBlock x:Name="TxtChipPhase1" Text="1. Warmup &amp; Idle" FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <!-- CHIP 2: DOWNLOAD LAST -->
+                                    <Border x:Name="ChipPhase2" Grid.Column="1" Background="#161B26" BorderBrush="#252D3E" BorderThickness="1" CornerRadius="6" Padding="10,5" Margin="0,0,6,0">
+                                        <TextBlock x:Name="TxtChipPhase2" Text="2. Download-Stresstest" FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <!-- CHIP 3: COOLDOWN -->
+                                    <Border x:Name="ChipPhase3" Grid.Column="2" Background="#161B26" BorderBrush="#252D3E" BorderThickness="1" CornerRadius="6" Padding="10,5" Margin="0,0,6,0">
+                                        <TextBlock x:Name="TxtChipPhase3" Text="3. Puffer-Drain / Cooldown" FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                    </Border>
+
+                                    <!-- CHIP 4: UPLOAD LAST -->
+                                    <Border x:Name="ChipPhase4" Grid.Column="3" Background="#161B26" BorderBrush="#252D3E" BorderThickness="1" CornerRadius="6" Padding="10,5">
+                                        <TextBlock x:Name="TxtChipPhase4" Text="4. Upload-Stresstest" FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+
+                                <!-- ROW 1: STATUS TEXT + PERCENTAGE -->
+                                <Grid Margin="0,0,0,8">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock x:Name="TxtBbLiveIcon" Text="🟢" FontSize="11" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtBbLivePhase" Text="Bereit für Benchmark. Klicke auf 'Benchmark starten'." FontSize="12" FontWeight="SemiBold" Foreground="#E2E8F0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="TxtBbLivePercent" Text="0 %" FontSize="13.5" FontWeight="Bold" Foreground="#10B981" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- ROW 2: HIGH-TECH PROGRESSBAR -->
+                                <ProgressBar x:Name="ProgressBbTest" Height="6" Background="#141924" Foreground="#10B981" Value="0" Maximum="100" BorderThickness="0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- MAIN BENCHMARK RESULTS (WAVEFORM GRADE + 3 MEASUREMENT COLUMNS) -->
+                        <Grid x:Name="GridBbMain" Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- LEFT: WAVEFORM GRADE CARD -->
+                            <Border x:Name="CardBbGrade" Grid.Column="0" Background="#11141B" CornerRadius="14" BorderBrush="#1E2330" BorderThickness="1.2" Padding="20">
+                                <StackPanel VerticalAlignment="Center">
+                                    <!-- HEADER -->
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,14" HorizontalAlignment="Center">
+                                        <TextBlock Text="WAVEFORM RATING" FontSize="11.5" FontWeight="Bold" Foreground="#64748B"/>
+                                    </StackPanel>
+
+                                    <!-- GRADE BADGE -->
+                                    <Border x:Name="BorderBbGradeCard" Width="130" Height="110" CornerRadius="14" Background="#141923" BorderBrush="#252E40" BorderThickness="1.8" HorizontalAlignment="Center" Margin="0,0,0,12">
+                                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <TextBlock x:Name="TxtBbGradeBadge" Text="—" FontSize="56" FontWeight="Bold" Foreground="#64748B" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- BUFFERBLOAT DELTA BADGE -->
+                                    <Border x:Name="BorderBbMaxDelta" Background="#161B26" CornerRadius="6" Padding="12,5" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                        <TextBlock x:Name="TxtBbGradeDelta" Text="+ — ms Bufferbloat-Anstieg" FontSize="12" FontWeight="Bold" Foreground="#94A3B8"/>
+                                    </Border>
+
+                                    <!-- TECHNICAL VERDICT -->
+                                    <TextBlock x:Name="TxtBbGradeVerdict" Text="Keine Messung aktiv" FontSize="13" FontWeight="Bold" Foreground="#FFFFFF" TextAlignment="Center" Margin="0,0,0,6"/>
+                                    <TextBlock x:Name="TxtBbGradeDesc" Text="Starte den Test, um deinen Bufferbloat unter Volllast präzise zu messen." FontSize="11" Foreground="#94A3B8" TextAlignment="Center" TextWrapping="Wrap" LineHeight="15"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- RIGHT: 3 WAVEFORM METRIC COLUMNS (IDLE, DOWNLOAD, UPLOAD) -->
+                            <Grid x:Name="GridBbMetrics" Grid.Column="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- SÄULE 1: UNLOADED (IDLE) -->
+                                <Border x:Name="CardBbIdle" Grid.Column="0" Background="#11141B" CornerRadius="14" BorderBrush="#1E2330" BorderThickness="1.2" Padding="16,14">
+                                    <StackPanel>
+                                        <!-- BADGE -->
+                                        <Border Background="#1C1E26" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,12">
+                                            <TextBlock Text="RUHEZUSTAND (IDLE)" FontSize="9" FontWeight="Bold" Foreground="#94A3B8"/>
+                                        </Border>
+
+                                        <!-- BIG LATENCY -->
+                                        <TextBlock Text="Basis-Latenz" FontSize="11" Foreground="#64748B" Margin="0,0,0,2"/>
+                                        <TextBlock x:Name="TxtBbUnloadedAvg" Text="— ms" FontSize="26" FontWeight="Bold" Foreground="#F8FAFC" Margin="0,0,0,10"/>
+
+                                        <!-- DETAILS -->
+                                        <Border Height="1" Background="#1A202C" Margin="0,0,0,10"/>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Jitter:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbUnloadedJitter" Text="— ms" FontSize="11.5" FontWeight="SemiBold" Foreground="#38BDF8" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Min / Max:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbUnloadedMinMax" Text="— / — ms" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid>
+                                            <TextBlock Text="Paketverlust:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbUnloadedLoss" Text="0.0 %" FontSize="11" FontWeight="SemiBold" Foreground="#10B981" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- SÄULE 2: DOWNLOAD (AKTIV) -->
+                                <Border x:Name="CardBbDl" Grid.Column="2" Background="#11141B" CornerRadius="14" BorderBrush="#1E2330" BorderThickness="1.2" Padding="16,14">
+                                    <StackPanel>
+                                        <!-- BADGE -->
+                                        <Border Background="#251219" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,12">
+                                            <TextBlock Text="DOWNLOAD (AKTIV)" FontSize="9" FontWeight="Bold" Foreground="#F43F5E"/>
+                                        </Border>
+
+                                        <!-- BIG SPEED -->
+                                        <TextBlock Text="Echte Bandbreite" FontSize="11" Foreground="#64748B" Margin="0,0,0,2"/>
+                                        <TextBlock x:Name="TxtBbDlSpeed" Text="— Mbit/s" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,0,0,10"/>
+
+                                        <!-- DETAILS -->
+                                        <Border Height="1" Background="#1A202C" Margin="0,0,0,10"/>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Latenz unter Last:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbDlPing" Text="— ms" FontSize="11.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Bufferbloat-Delta:" FontSize="11" Foreground="#64748B"/>
+                                            <Border x:Name="BorderBbDlDelta" Background="#161B26" CornerRadius="4" Padding="6,1" HorizontalAlignment="Right">
+                                                <TextBlock x:Name="TxtBbDlDelta" Text="+ — ms" FontSize="11" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                        </Grid>
+                                        <Grid>
+                                            <TextBlock Text="Max. Peak-Spike:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbDlMaxSpike" Text="— ms" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- SÄULE 3: UPLOAD (AKTIV) -->
+                                <Border x:Name="CardBbUl" Grid.Column="4" Background="#11141B" CornerRadius="14" BorderBrush="#1E2330" BorderThickness="1.2" Padding="16,14">
+                                    <StackPanel>
+                                        <!-- BADGE -->
+                                        <Border Background="#251630" CornerRadius="4" Padding="6,2" HorizontalAlignment="Left" Margin="0,0,0,12">
+                                            <TextBlock Text="UPLOAD (AKTIV)" FontSize="9" FontWeight="Bold" Foreground="#C084FC"/>
+                                        </Border>
+
+                                        <!-- BIG SPEED -->
+                                        <TextBlock Text="Echte Bandbreite" FontSize="11" Foreground="#64748B" Margin="0,0,0,2"/>
+                                        <TextBlock x:Name="TxtBbUlSpeed" Text="— Mbit/s" FontSize="24" FontWeight="Bold" Foreground="#FFFFFF" Margin="0,0,0,10"/>
+
+                                        <!-- DETAILS -->
+                                        <Border Height="1" Background="#1A202C" Margin="0,0,0,10"/>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Latenz unter Last:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbUlPing" Text="— ms" FontSize="11.5" FontWeight="Bold" Foreground="#F8FAFC" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                        <Grid Margin="0,0,0,6">
+                                            <TextBlock Text="Bufferbloat-Delta:" FontSize="11" Foreground="#64748B"/>
+                                            <Border x:Name="BorderBbUlDelta" Background="#161B26" CornerRadius="4" Padding="6,1" HorizontalAlignment="Right">
+                                                <TextBlock x:Name="TxtBbUlDelta" Text="+ — ms" FontSize="11" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                        </Grid>
+                                        <Grid>
+                                            <TextBlock Text="Max. Peak-Spike:" FontSize="11" Foreground="#64748B"/>
+                                            <TextBlock x:Name="TxtBbUlMaxSpike" Text="— ms" FontSize="11" Foreground="#94A3B8" HorizontalAlignment="Right"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Grid>
+
+                        <!-- BOTTOM: DETAILED TECHNICAL TELEMETRY CARD -->
+                        <Border Background="#11141B" CornerRadius="14" BorderBrush="#1E2330" BorderThickness="1.2" Padding="18,14">
+                            <StackPanel>
+                                <!-- HEADER -->
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Border Width="24" Height="24" CornerRadius="6" Background="#181D28" BorderBrush="#252D3E" BorderThickness="1" Margin="0,0,8,0">
+                                            <TextBlock Text="🔬" FontSize="11" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <TextBlock Text="Netzwerk-Telemetrie &amp; Paket-Diagnose" FontSize="13" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="TxtBbTargetHostDisplay" Grid.Column="1" Text="Ziel: 1.1.1.1 (Cloudflare Anycast)" FontSize="11" Foreground="#64748B" VerticalAlignment="Center"/>
+                                </Grid>
+
+                                <!-- 4 TELEMETRY TILES -->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.35*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="0.8*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="1.15*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- TILE 1: PAKET-STATISTIK -->
+                                    <Border Grid.Column="0" Background="#0C0E14" CornerRadius="8" BorderBrush="#191E2B" BorderThickness="1" Padding="12,10" MinHeight="66">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="PAKET-STATISTIK" FontSize="9" FontWeight="Bold" Foreground="#64748B" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtBbPacketsStats" Text="— / — (0.0% Verlust)" FontSize="11.5" FontWeight="SemiBold" Foreground="#34D399" TextWrapping="Wrap" LineHeight="16"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- TILE 2: MAX SPIKE -->
+                                    <Border Grid.Column="2" Background="#0C0E14" CornerRadius="8" BorderBrush="#191E2B" BorderThickness="1" Padding="12,10" MinHeight="66">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="MAXIMALER SPIKE" FontSize="9" FontWeight="Bold" Foreground="#64748B" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtBbMaxSpike" Text="— ms" FontSize="12" FontWeight="SemiBold" Foreground="#FDA4AF" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- TILE 3: MEDIAN LATENZ -->
+                                    <Border Grid.Column="4" Background="#0C0E14" CornerRadius="8" BorderBrush="#191E2B" BorderThickness="1" Padding="12,10" MinHeight="66">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="MEDIAN-LATENZ" FontSize="9" FontWeight="Bold" Foreground="#64748B" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtBbMedianStats" Text="Idle — · DL — · UL —" FontSize="11" FontWeight="SemiBold" Foreground="#38BDF8" TextWrapping="Wrap" LineHeight="16"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- TILE 4: JITTER & STABILITÄT -->
+                                    <Border Grid.Column="6" Background="#0C0E14" CornerRadius="8" BorderBrush="#191E2B" BorderThickness="1" Padding="12,10" MinHeight="66">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="JITTER &amp; VARIANZ" FontSize="9" FontWeight="Bold" Foreground="#64748B" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtBbStdDevStats" Text="Jitter: — ms · σ: — ms" FontSize="11" FontWeight="SemiBold" Foreground="#FBBF24" TextWrapping="Wrap" LineHeight="16"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ===================================================================== -->
+            <!-- TAB 1: GENERAL TWEAKS (2-COLUMN CARDS GRID) -->
+            <!-- ===================================================================== -->

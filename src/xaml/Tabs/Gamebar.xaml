@@ -1,0 +1,73 @@
+            <Border x:Name="TabContentGamebar" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <TextBlock Text="Spielprofile &amp; Xbox Game Bar" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- GAMEBAR & KGL LIVE DETAIL PANEL -->
+                        <Border Style="{StaticResource CardBorder}" Padding="20">
+                                <StackPanel>
+                                    <!-- HEADER STATUS -->
+                                    <Grid Margin="0,0,0,14">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="Xbox Game Bar &amp; KGL Diagnose" FontSize="16" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                            <TextBlock Text="Known Game List Revision &amp; Thread-Pacing Analyse" FontSize="11" Foreground="#64748B"/>
+                                        </StackPanel>
+                                         <Border Grid.Column="1" Style="{StaticResource TagBadgeInfo}">
+                                             <TextBlock Text="NVIDIA / AMD PROFIL"/>
+                                         </Border>
+                                    </Grid>
+
+                                    <!-- SYNC STATUS BANNER -->
+                                    <Border x:Name="BorderKglSync" Background="#10251B" CornerRadius="8" Padding="12" Margin="0,0,0,14" BorderBrush="#10B981" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock x:Name="TxtKglSyncTitle" Text="✅ KGL-Versionen sind synchron" FontWeight="Bold" Foreground="#34D399" FontSize="12"/>
+                                                <TextBlock x:Name="TxtKglSyncDesc" Text="Game Bar und der Background-Service laufen auf der gleichen KGL-Revision." Foreground="#A7F3D0" FontSize="11" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                            <Border x:Name="PillKglStatus" Grid.Column="1" Background="#064E3B" CornerRadius="4" Padding="8,3" VerticalAlignment="Center">
+                                                <TextBlock x:Name="TxtKglPill" Text="OPTIMAL" FontSize="10" FontWeight="Bold" Foreground="#34D399"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- LIVE VALUES -->
+                                    <Border Background="#161922" CornerRadius="8" Padding="14" Margin="0,0,0,16" BorderBrush="#202634" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Geladene KGL-Version:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtKglLoaded" Text="Ermittle..." Foreground="#38BDF8" FontSize="12" FontWeight="Bold" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="KGL-Dienst-Version:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtKglService" Text="Ermittle..." Foreground="#38BDF8" FontSize="12" FontWeight="Bold" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Game Bar App-Version:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtGamebarVersion" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,8"/>
+                                            <TextBlock Grid.Row="3" Grid.Column="0" Text="AMD 3D V-Cache Dienst:" Foreground="#94A3B8" FontSize="11.5"/>
+                                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtAmd3dStatus" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- ACTION BUTTONS -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="BtnOpenGamebar" Content="🎮 Xbox Game Bar öffnen (Win + G)" Style="{StaticResource PrimaryBtn}" Height="34"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>

@@ -1,0 +1,765 @@
+            <Border x:Name="TabContentMouse" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- PAGE HEADER -->
+                        <TextBlock Text="Allgemeine Tweaks" Style="{StaticResource TabHeaderTitle}"/>
+
+                        <!-- SEARCH & FILTER ROW -->
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- SEARCH BAR -->
+                            <Border Grid.Column="0" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Height="38" Padding="12,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="🔍" FontSize="13" Foreground="#64748B" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                    <TextBox x:Name="TxtSearchMouseTweaks" Grid.Column="1" Background="Transparent" Foreground="#F8FAFC" BorderThickness="0" FontSize="12.5" VerticalAlignment="Center" CaretBrush="#38BDF8"/>
+                                    <TextBlock x:Name="TxtSearchMousePlaceholder" Grid.Column="1" Text="Tweaks durchsuchen (z. B. LAN, Queue, Priorität, Kernisolierung, Energiesparplan)..." FontSize="12.5" Foreground="#64748B" VerticalAlignment="Center" IsHitTestVisible="False" Margin="2,0,0,0"/>
+                                    <Button x:Name="BtnClearSearchMouseTweaks" Grid.Column="2" Content="✕" Width="24" Height="24" FontSize="11" Background="Transparent" BorderThickness="0" Foreground="#94A3B8" Cursor="Hand" Visibility="Collapsed" Focusable="False" ToolTip="Suche leeren">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="Transparent" CornerRadius="4" Padding="2">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                            </Border>
+
+                            <!-- FILTER PILLS -->
+                            <Border Grid.Column="2" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Height="38" Padding="6,0" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <RadioButton x:Name="RadFilterMouseAll" GroupName="MouseFilterGroup" Content="Alle" Style="{StaticResource FilterPillRadioGreen}" IsChecked="True" Padding="12,5" Margin="0,0,4,0"/>
+                                    <RadioButton x:Name="RadFilterMouseActive" GroupName="MouseFilterGroup" Content="Aktiv" Style="{StaticResource FilterPillRadioGreen}" Padding="12,5" Margin="0,0,4,0"/>
+                                    <RadioButton x:Name="RadFilterMouseInactive" GroupName="MouseFilterGroup" Content="Nicht aktiv" Style="{StaticResource FilterPillRadioGreen}" Padding="12,5" Margin="0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- NO RESULTS HINT -->
+                        <Border x:Name="PanelMouseNoResults" Background="#12151E" BorderBrush="#262C3A" BorderThickness="1" CornerRadius="8" Padding="32" Margin="0,0,0,16" Visibility="Collapsed" HorizontalAlignment="Stretch">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="🔍 Keine passenden Tweaks gefunden" FontSize="14" FontWeight="Bold" Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Versuche einen anderen Suchbegriff oder setze die Suche zurück." FontSize="11.5" Foreground="#64748B" HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 2-COLUMN CARDS GRID -->
+                        <Grid x:Name="GridMouseTweaks" Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- CARD 1: MOUSE DATA QUEUE SIZE -->
+                            <Border x:Name="CardMouseQueue" Grid.Row="0" Grid.Column="0" Tag="MouseDataQueueSize Puffer Buffer Cursor Eingabeverzögerung Abtastung 16 100 Regedit Maus" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE962;"/>
+                                            </Border>
+                                            <TextBlock Text="MouseDataQueueSize" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="MouseDataQueueSize: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtMouseQueueLiveVal" Text="100 (Standard)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Puffergröße für Maus-Events (Default: 100 ➔ Opt: 16)" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Minimiert Cursor-Latenz &amp; Abtastverzögerung" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtSwitchSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                            <TextBlock x:Name="TxtPill" Text="AKTIV (16)" Visibility="Collapsed"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtMouseQueueReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+
+                                        <!-- ADJUST BUTTON & POPUP SLIDER -->
+                                        <Button x:Name="BtnAdjustMouseQueue" Grid.Column="2" Content="⚙️ 16" Style="{StaticResource CardMiniBtn}"/>
+                                        <Popup x:Name="PopupMouseQueue" PlacementTarget="{Binding ElementName=BtnAdjustMouseQueue}" Placement="Top" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade">
+                                            <Border Background="#12151E" BorderBrush="#2D3546" BorderThickness="1.2" CornerRadius="10" Padding="14" Width="260" Margin="0,0,0,6">
+                                                <Border.Effect>
+                                                    <DropShadowEffect BlurRadius="16" ShadowDepth="6" Opacity="0.7" Color="#000000"/>
+                                                </Border.Effect>
+                                                <StackPanel>
+                                                    <Grid Margin="0,0,0,8">
+                                                        <TextBlock Text="Queue Size anpassen" FontSize="12.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                                        <TextBlock x:Name="TxtMouseQueueSliderVal" Text="16" FontSize="13" FontWeight="Bold" Foreground="#38BDF8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Slider x:Name="SliderMouseQueue" Minimum="16" Maximum="100" Value="16" SmallChange="1" LargeChange="10" IsSnapToTickEnabled="True" TickFrequency="1" Margin="0,4,0,8"/>
+                                                    <Grid Margin="0,0,0,10">
+                                                        <TextBlock Text="16" FontSize="10" Foreground="#34D399" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="100" FontSize="10" Foreground="#94A3B8" HorizontalAlignment="Right"/>
+                                                    </Grid>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="6"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button x:Name="BtnMouseQueuePreset16" Grid.Column="0" Content="16" Style="{StaticResource SecondaryBtn}" Height="24" FontSize="10" Padding="0,0"/>
+                                                        <Button x:Name="BtnMouseQueueApply" Grid.Column="2" Content="Übernehmen" Style="{StaticResource PrimaryBtn}" Height="24" FontSize="10" Padding="0,0"/>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
+
+                                        <Button x:Name="BtnOpenRegedit" Grid.Column="3" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleQueue" Grid.Column="4" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 2: WIN32 PRIORITY SEPARATION -->
+                            <Border x:Name="CardMousePriority" Grid.Row="0" Grid.Column="2" Tag="Win32PrioritySeparation Priorität Priority Separation CPU Scheduler Vordergrund Foreground Quanta 42 40 38 36 26 0x1A 1A 2 Regedit" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE950;"/>
+                                            </Border>
+                                            <TextBlock Text="Win32PrioritySeparation" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="Win32PrioritySeparation: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtPriorityLiveVal" Text="2 (0x02)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Bevorzugt Vordergrund-Prozesse im CPU-Scheduler" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Weist Spielen optimierte CPU-Quanta zu" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPrioritySubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtPriorityReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <ComboBox x:Name="CmbPriority" Grid.Column="2" SelectedIndex="0" Width="102" Height="26" FontSize="10.5" Margin="0,0,5,0" VerticalAlignment="Center">
+                                            <ComboBoxItem Content="42 (0x2A)" Tag="42"/>
+                                            <ComboBoxItem Content="40 (0x28)" Tag="40"/>
+                                            <ComboBoxItem Content="38 (0x26)" Tag="38"/>
+                                            <ComboBoxItem Content="36 (0x24)" Tag="36"/>
+                                            <ComboBoxItem Content="26 (0x1A)" Tag="26"/>
+                                            <ComboBoxItem Content="2 (0x02)" Tag="2"/>
+                                        </ComboBox>
+                                        <Button x:Name="BtnOpenPriorityRegedit" Grid.Column="3" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="TogglePriority" Grid.Column="4" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 3: KERNISOLIERUNG -->
+                            <Border x:Name="CardMouseCoreIso" Grid.Row="2" Grid.Column="0" Tag="Kernisolierung Core Isolation HVCI VBS Memory Integrity Speicherintegrität Virtualisierungssicherheit Windows Defender Reboot Neustart Sicherheit" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEA18;"/>
+                                            </Border>
+                                            <TextBlock Text="Kernisolierung (HVCI) deaktivieren" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="HVCI &amp; VBS: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtCoreIsoLiveVal" Text="1 (Aktiv)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#241838" BorderBrush="#4C1D95" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Bcdedit" FontSize="9" FontWeight="Bold" Foreground="#A78BFA"/>
+                                            </Border>
+                                            <TextBlock Text="hypervisorlaunchtype: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtHypervisorLiveVal" Text="auto" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Schaltet Defender-Virtualisierungssicherheit aus" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Entfernt CPU-Virtualisierungs-Overhead in Games" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtCoreIsoSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtCoreIsoReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <Button x:Name="BtnOpenDefenderCoreIso" Grid.Column="2" Content="🛡️ Sicherheit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleCoreIso" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 4: ENERGIESPARPLAN -->
+                            <Border x:Name="CardMousePowerPlan" Grid.Row="2" Grid.Column="2" Tag="Energiesparplan Power Plan Powercfg Balanced Ausbalanciert Höchstleistung High Performance Energie Core-Parking Jitter" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE945;"/>
+                                            </Border>
+                                            <TextBlock Text="Energiesparplan" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#2A2213" BorderBrush="#78350F" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="PowerCfg" FontSize="9" FontWeight="Bold" Foreground="#FBBF24"/>
+                                            </Border>
+                                            <TextBlock Text="Aktiver Plan: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtPowerPlanLiveVal" Text="Ausbalanciert" FontSize="11" FontWeight="Bold" Foreground="#34D399" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="210"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Aktiviert modernes CPU Core-Parking (CPPC2)" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Dynamischer Boost ohne Mikroruckler &amp; Jitter" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPowerSubtitle" Text="Status: Optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#34D399"/>
+                                        </StackPanel>
+                                        <ComboBox x:Name="CmbPowerPlans" Grid.Column="1" SelectedIndex="0" Width="125" Height="26" FontSize="10.5" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                        <Button x:Name="BtnOpenPowerCpl" Grid.Column="2" Content="⚙️ Energie" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="TogglePowerPlan" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 5: LAN ENERGIESPARMODI & DROSSELUNG -->
+                            <Border x:Name="CardLanEnergy" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="1" Tag="LAN Netzwerk Ethernet Energiesparmodi EEE Green Ethernet PowerSavingMode GigaLite Interrupt Moderation Drosselung Realtek Intel Killer Marvell NIC Adapter Netzwerkkarte" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEC3B;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="LAN Energiesparen &amp; Drosselung" Style="{StaticResource CardTitleText}"/>
+                                                <TextBlock x:Name="TxtLanEnergyAdapter" Text="Ermittle LAN-Adapter..." FontSize="11" Foreground="#64748B" Margin="0,2,0,0" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,8"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="*EEE &amp; GreenEthernet: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtLanEeeLiveVal" Text="1 (Aktiv)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="PowerSaving &amp; GigaLite: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtLanPowerLiveVal" Text="1 (Aktiv)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="*InterruptModeration: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtLanInterruptLiveVal" Text="1 (Aktiv)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Deaktiviert Stromsparmodi &amp; Interrupt-Drosselung" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0">
+                                            <TextBlock x:Name="TxtLanEnergySubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenLanDevMgmt" Grid.Column="1" Content="🌐 Adapter" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleLanEnergy" Grid.Column="2" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 6: DISABLE PAGING EXECUTIVE -->
+                            <Border x:Name="CardPagingExecutive" Grid.Row="4" Grid.Column="2" Tag="DisablePagingExecutive Memory Management RAM Kernel Paging Auslagerungsdatei Speicher Pagefile Session Manager" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEDA2;"/>
+                                            </Border>
+                                            <TextBlock Text="DisablePagingExecutive" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="DisablePagingExecutive: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtPagingLiveVal" Text="0 (Auslagern erlaubt)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Hält Kernel &amp; Gerätetreiber fest im RAM" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Verhindert DPC-Latenzen durch Pagefile-Zugriffe" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtPagingSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtPagingReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <Button x:Name="BtnOpenPagingRegedit" Grid.Column="2" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="TogglePagingExecutive" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 7: SYSTEM RESPONSIVENESS -->
+                            <Border x:Name="CardSystemResponsiveness" Grid.Row="6" Grid.Column="0" Tag="SystemResponsiveness Multimedia SystemProfile CPU Scheduler Priorität Vordergrund Gaming 0 20 System Responsiveness" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE9D9;"/>
+                                            </Border>
+                                            <TextBlock Text="SystemResponsiveness" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="SystemResponsiveness: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtSystemResponsivenessLiveVal" Text="20 (20% Reserve)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Entfernt CPU-Reservierung für Hintergrunddienste" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Gibt 100% CPU-Ressourcen für Spiele frei (0 = Aus)" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtSystemResponsivenessSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtSystemResponsivenessReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <Button x:Name="BtnOpenSystemResponsivenessRegedit" Grid.Column="2" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleSystemResponsiveness" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 8: NETWORK THROTTLING INDEX -->
+                            <Border x:Name="CardNetworkThrottling" Grid.Row="6" Grid.Column="2" Tag="NetworkThrottlingIndex ffffffff Hex Multimedia SystemProfile Netzwerk Network Drosselung Latenz Ping Jitter 10 Throttling Packet Loss" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEC3B;"/>
+                                            </Border>
+                                            <TextBlock Text="NetworkThrottlingIndex" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,10"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="NetworkThrottlingIndex: " FontSize="11" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtNetworkThrottlingLiveVal" Text="10 (Drossel aktiv)" FontSize="11" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Deaktiviert künstliche Netzwerk-Drosselung" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Verhindert Ping-Spikes &amp; Paketverluste (0xFFFFFFFF)" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtNetworkThrottlingSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtNetworkThrottlingReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <Button x:Name="BtnOpenNetworkThrottlingRegedit" Grid.Column="2" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleNetworkThrottling" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 9: MMCSS GAMING TASKS (GPU & CPU PRIORITY) -->
+                            <Border x:Name="CardMmcssGames" Grid.Row="8" Grid.Column="0" Tag="GPU Priority 8 Priority 6 Scheduling Category High SFIO Priority High MMCSS Games Tasks Multimedia SystemProfile Grafikkarte Task Scheduler Gaming" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE7FC;"/>
+                                            </Border>
+                                            <TextBlock Text="MMCSS Gaming-Priorität" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,8"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="GPU &amp; CPU Priority: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtMmcssPrioLiveVal" Text="8 / 2 (Standard)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="Category &amp; SFIO: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtMmcssCategoryLiveVal" Text="Medium / Normal" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Priorisiert Spiele im Multimedia-Scheduler (MMCSS)" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Maximiert Grafik- und I/O-Durchsatz" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0">
+                                            <TextBlock x:Name="TxtMmcssGamesSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenMmcssGamesRegedit" Grid.Column="1" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleMmcssGames" Grid.Column="2" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 10: GAMEDVR & FULLSCREEN EXCLUSIVE (FSE) -->
+                            <Border x:Name="CardGameDvr" Grid.Row="8" Grid.Column="2" Tag="GameDVR_Enabled 0 GameDVR_FSEBehaviorMode 2 AllowGameDVR 0 GameDVR GameConfigStore Fullscreen Exclusive FSE Input Lag Game Bar Aufzeichnung DVR" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE714;"/>
+                                            </Border>
+                                            <TextBlock Text="GameDVR &amp; FSE Verhalten" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,8"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="GameDVR_Enabled: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtGameDvrLiveVal" Text="1 (Aktiv)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="FSE Behavior Mode: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtFseModeLiveVal" Text="0 (Standard)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="AllowGameDVR (Policy): " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtAllowGameDvrLiveVal" Text="Gelöscht (Erlaubt)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Deaktiviert GameDVR &amp; erzwingt FSE gegen DWM-Lag" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0">
+                                            <TextBlock x:Name="TxtGameDvrSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenGameDvrRegedit" Grid.Column="1" Content="🛠️ Regedit" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleGameDvr" Grid.Column="2" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 11: USB SELECTIVE SUSPEND -->
+                            <Border x:Name="CardUsbSelectiveSuspend" Grid.Row="10" Grid.Column="0" Tag="SelectiveSuspendEnabled 0 USB Selective Suspend Energiesparen Stromsparen Sleep Maus Mouse Tastatur Keyboard Disconnect Hub Device Parameters" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEC59;"/>
+                                            </Border>
+                                            <TextBlock Text="USB Selective Suspend" Style="{StaticResource CardTitleText}"/>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,8"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#1E293B" BorderBrush="#334155" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="Registry" FontSize="9" FontWeight="Bold" Foreground="#38BDF8"/>
+                                            </Border>
+                                            <TextBlock Text="SelectiveSuspendEnabled: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtUsbRegLiveVal" Text="1 (Aktiviert)" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4" VerticalAlignment="Center">
+                                            <Border Background="#2A2213" BorderBrush="#78350F" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="PowerCfg" FontSize="9" FontWeight="Bold" Foreground="#FBBF24"/>
+                                            </Border>
+                                            <TextBlock Text="USB-Stromsparen: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtUsbPowerLiveVal" Text="Aktiviert" FontSize="10.5" FontWeight="Bold" Foreground="#F97316" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Deaktiviert Selective Suspend auf allen USB-Hubs" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Verhindert Wake-Up-Lag &amp; USB-Disconnects (0 = Aus)" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,6,0">
+                                            <TextBlock x:Name="TxtUsbSelectiveSuspendSubtitle" Text="Status: Nicht optimiert" FontSize="11" FontWeight="SemiBold" Foreground="#EF4444"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenUsbDevMgmt" Grid.Column="1" Content="🔌 Geräte-Manager" Style="{StaticResource CardMiniBtn}" Margin="0,0,8,0"/>
+                                        <ToggleButton x:Name="ToggleUsbSelectiveSuspend" Grid.Column="2" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- CARD 12: REALTEK LAN RSS OPTIMIZER -->
+                            <Border x:Name="CardRealtekRss" Grid.Row="10" Grid.Column="2" Tag="Realtek RSS Receive Side Scaling LAN Ethernet Netzwerk Netzwerktreiber DPC Interrupts Core 2 BaseProcessorNumber Treiber Driver Latency" Style="{StaticResource CardBorder}" Padding="20">
+                                <Grid MinHeight="190">
+                                    <StackPanel VerticalAlignment="Top">
+                                        <!-- HEADER -->
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEC3B;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Realtek RSS Optimizer" Style="{StaticResource CardTitleText}"/>
+                                                <TextBlock x:Name="TxtRealtekRssAdapter" Text="Ermittle Realtek-Adapter..." FontSize="10.5" Foreground="#64748B" Margin="0,2,0,0" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- SEPARATOR -->
+                                        <Border Style="{StaticResource SeparatorLine}" Margin="0,12,0,8"/>
+
+                                        <!-- LIVE INSPECTOR -->
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2" VerticalAlignment="Center">
+                                            <Border Background="#162B23" BorderBrush="#065F46" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="WMI" FontSize="9" FontWeight="Bold" Foreground="#34D399"/>
+                                            </Border>
+                                            <TextBlock Text="RSS Enabled: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtRealtekRssEnabledLiveVal" Text="Ermittle..." FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4" VerticalAlignment="Center">
+                                            <Border Background="#162B23" BorderBrush="#065F46" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="0,0,6,0" VerticalAlignment="Center">
+                                                <TextBlock Text="WMI" FontSize="9" FontWeight="Bold" Foreground="#34D399"/>
+                                            </Border>
+                                            <TextBlock Text="BaseProcessorNumber: " FontSize="10.5" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtRealtekRssProcLiveVal" Text="Ermittle..." FontSize="10.5" FontWeight="Bold" Foreground="#94A3B8" VerticalAlignment="Center"/>
+                                        </StackPanel>
+
+                                        <!-- DESCRIPTION -->
+                                        <TextBlock Style="{StaticResource CardDescText}">
+                                            <Run Text="• Verlagert Netzwerk-Interrupts von Core 0 auf Core 2" Foreground="#CBD5E1"/><LineBreak/>
+                                            <Run Text="• Entlastet primären Gaming-Kern von DPC-Latenzen" Foreground="#CBD5E1"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- FOOTER ANCHORED AT BOTTOM -->
+                                    <Grid VerticalAlignment="Bottom">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,4,0">
+                                            <TextBlock x:Name="TxtRealtekRssSubtitle" Text="Status: Ermittle..." FontSize="11" FontWeight="SemiBold" Foreground="#94A3B8"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="TxtRealtekRssReboot" Grid.Column="1" Text="⚠️ Neustart notwendig" FontSize="10" Foreground="#EF4444" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,6,0" Visibility="Collapsed"/>
+                                        <Button x:Name="BtnRealtekRssDriver" Grid.Column="2" Content="🌐 Treiber" Style="{StaticResource CardMiniBtn}"/>
+                                        <ToggleButton x:Name="ToggleRealtekRss" Grid.Column="3" Style="{StaticResource ModernToggle}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ===================================================================== -->
+            <!-- TAB: TIMER RESOLUTION (LIVE HOCHPRÄZISIONS-TIMER) -->
+            <!-- ===================================================================== -->

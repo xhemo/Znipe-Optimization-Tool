@@ -1,0 +1,365 @@
+            <Border x:Name="TabContentHardwareInfo" Grid.Row="2" Background="Transparent" Visibility="Collapsed">
+                <ScrollViewer Style="{StaticResource TabScrollViewer}">
+                    <StackPanel Style="{StaticResource TabContentStack}">
+                        <!-- TAB HEADER -->
+                        <StackPanel Margin="0,0,0,16">
+                            <TextBlock Text="Hardware &amp; System-Informationen" Style="{StaticResource TabHeaderTitle}" Margin="0"/>
+                            <TextBlock Text="Detaillierte Übersicht aller Komponenten, Treiberversionen &amp; System-Spezifikationen" Style="{StaticResource TabHeaderSubtitle}" Margin="0,3,0,0"/>
+                        </StackPanel>
+
+                        <!-- ============================================================== -->
+                        <!-- TOP 4 MAIN HARDWARE HERO CARDS (2x2 GRID) -->
+                        <!-- ============================================================== -->
+                        <Grid x:Name="GridHwHeroCards" Margin="0,0,0,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="14"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 1. CPU HERO CARD -->
+                            <Border x:Name="CardHwCpu" Grid.Row="0" Grid.Column="0" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE950;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="PROZESSOR (CPU)" FontSize="11" FontWeight="Bold" Foreground="#64748B"/>
+                                                <TextBlock x:Name="TxtHwCpuName" Text="Ermittle..." FontSize="13.5" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                            <Border Style="{StaticResource StatusPillBorder}" Padding="7,2" Margin="0,0,6,0">
+                                                <TextBlock x:Name="TxtHwCpuBadge" Text="CPU" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                            <Button x:Name="BtnCopyHwCpu" Content="📋" ToolTip="Prozessor-Namen kopieren" Style="{StaticResource CopyIconBtn}"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,4,0,10"/>
+
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Kerne &amp; Threads:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtHwCpuCores" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Taktfrequenz:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtHwCpuClock" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="L2 / L3 Cache:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHwCpuCache" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Sockel &amp; Architektur:" Foreground="#94A3B8" FontSize="11.5"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtHwCpuSocket" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 2. GPU HERO CARD -->
+                            <Border x:Name="CardHwGpu" Grid.Row="0" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE7FC;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="GRAFIKKARTE (GPU)" FontSize="11" FontWeight="Bold" Foreground="#64748B"/>
+                                                <TextBlock x:Name="TxtHwGpuName" Text="Ermittle..." FontSize="13.5" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                            <Border Style="{StaticResource StatusPillBorder}" Padding="7,2" Margin="0,0,6,0">
+                                                <TextBlock x:Name="TxtHwGpuBadge" Text="PCIe" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                            <Button x:Name="BtnCopyHwGpu" Content="📋" ToolTip="Grafikkarten-Namen kopieren" Style="{StaticResource CopyIconBtn}"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,4,0,10"/>
+
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Treiber-Version:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtHwGpuDriver" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Grafikspeicher (VRAM):" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtHwGpuVram" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Auflösung / Modus:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHwGpuRes" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Schnittstelle / iGPU:" Foreground="#94A3B8" FontSize="11.5"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtHwGpuSubGpu" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 3. MAINBOARD & BIOS HERO CARD -->
+                            <Border x:Name="CardHwBoard" Grid.Row="2" Grid.Column="0" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEDA2;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="MAINBOARD &amp; BIOS" FontSize="11" FontWeight="Bold" Foreground="#64748B"/>
+                                                <TextBlock x:Name="TxtHwBoardModel" Text="Ermittle..." FontSize="13.5" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                            <Border Style="{StaticResource StatusPillBorder}" Padding="7,2" Margin="0,0,6,0">
+                                                <TextBlock x:Name="TxtHwBoardChipset" Text="CHIPSET" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                            <Button x:Name="BtnCopyHwBoard" Content="📋" ToolTip="Mainboard-Modell kopieren" Style="{StaticResource CopyIconBtn}"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,4,0,10"/>
+
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Hersteller:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtHwBoardVendor" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="BIOS-Version:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtHwBiosVersion" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="Bold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="BIOS-Datum:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHwBiosDate" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Seriennummer:" Foreground="#94A3B8" FontSize="11.5"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtHwBoardSerial" Text="Ermittle..." Foreground="#64748B" FontSize="11.5"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 4. RAM HERO CARD -->
+                            <Border x:Name="CardHwRam" Grid.Row="2" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE964;"/>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="ARBEITSSPEICHER (RAM)" FontSize="11" FontWeight="Bold" Foreground="#64748B"/>
+                                                <TextBlock x:Name="TxtHwRamTotal" Text="Ermittle..." FontSize="13.5" FontWeight="Bold" Foreground="#FFFFFF"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                            <Border Style="{StaticResource StatusPillBorder}" Padding="7,2" Margin="0,0,6,0">
+                                                <TextBlock x:Name="TxtHwRamSpeed" Text="RAM" FontSize="9.5" FontWeight="Bold" Foreground="#94A3B8"/>
+                                            </Border>
+                                            <Button x:Name="BtnCopyHwRam" Content="📋" ToolTip="Installierte Module kopieren" Style="{StaticResource CopyIconBtn}"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,4,0,10"/>
+
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Konfiguration:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtHwRamSlots" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Installierte Module:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtHwRamModules" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Taktung / Profil:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHwRamClock" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Formfaktor &amp; Typ:" Foreground="#94A3B8" FontSize="11.5"/>
+                                        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="TxtHwRamUsage" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <!-- ============================================================== -->
+                        <!-- MONITORE & DISPLAYS (DYNAMISCHE KACHELN) -->
+                        <!-- ============================================================== -->
+                        <Grid x:Name="GridHwMonitors" Margin="0,0,0,14"/>
+
+                        <!-- ============================================================== -->
+                        <!-- DETAILED SECTIONS: OS, NETWORK & AUDIO -->
+                        <!-- ============================================================== -->
+
+
+                        <!-- 6. OPERATING SYSTEM & SECURITY CARD -->
+                        <Border Style="{StaticResource CardBorder}" Padding="18" Margin="0,0,0,14">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Border Width="28" Height="28" CornerRadius="6" Background="#181C26" BorderBrush="#262D3D" BorderThickness="1.2" Margin="0,0,10,0">
+                                        <TextBlock Text="🪟" FontSize="13" Foreground="#F8FAFC" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <TextBlock Text="Betriebssystem &amp; Windows-Spezifikationen" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <Border Style="{StaticResource SeparatorLine}" Margin="0,2,0,12"/>
+
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Windows-Edition:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsCaption" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="Bold" FontSize="11.5" Margin="0,0,0,8"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Aktivierungs-Status:" Foreground="#94A3B8" FontSize="11.5" VerticalAlignment="Center" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsActivation" Text="Ermittle..." Foreground="#10B981" FontWeight="Bold" FontSize="11.5" VerticalAlignment="Center" Margin="0,0,0,8"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Installierter Product Key:" Foreground="#94A3B8" FontSize="11.5" VerticalAlignment="Center" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtHwOsProductKey" Text="•••••-•••••-•••••-•••••-•••••" FontFamily="Consolas" Foreground="#38BDF8" FontWeight="SemiBold" FontSize="11.5" VerticalAlignment="Center" Margin="0,0,0,8"/>
+                                    <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8">
+                                        <Button x:Name="BtnToggleHwOsKey" Content="👁️" ToolTip="Product Key anzeigen" Style="{StaticResource CopyIconBtn}" Margin="6,0,0,0"/>
+                                        <Button x:Name="BtnCopyHwOsKey" Content="📋" ToolTip="Product Key kopieren" Style="{StaticResource CopyIconBtn}" Margin="6,0,0,0"/>
+                                    </StackPanel>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Version &amp; Build-Nummer:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsBuild" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11.5" Margin="0,0,0,8"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Installationsdatum:" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsInstallDate" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,8"/>
+
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Letzter Systemstart (Uptime):" Foreground="#94A3B8" FontSize="11.5" Margin="0,0,0,8"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsUptime" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11.5" Margin="0,0,0,8"/>
+
+                                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Sicherheits-Status:" Foreground="#94A3B8" FontSize="11.5"/>
+                                    <TextBlock Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TxtHwOsSecurity" Text="Ermittle..." Foreground="#94A3B8" FontWeight="SemiBold" FontSize="11.5"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 7. NETWORK & AUDIO CARD (2-COLUMN) -->
+                        <Grid x:Name="GridHwNetAudio" Margin="0,0,0,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- NETWORK -->
+                            <Border x:Name="CardHwNet" Grid.Column="0" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                        <Border Style="{StaticResource IconBoxBorder}">
+                                            <TextBlock Style="{StaticResource IconBoxText}" Text="&#xEC3B;"/>
+                                        </Border>
+                                        <TextBlock Text="Netzwerk &amp; LAN" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,2,0,10"/>
+
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <TextBlock Text="Adapter:" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtHwNetAdapter" Grid.Column="1" Text="Ermittle..." Foreground="#F8FAFC" FontWeight="SemiBold" FontSize="11" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                        <Button x:Name="BtnCopyHwNetAdapter" Grid.Column="2" Content="📋" ToolTip="Adapter-Namen kopieren" Style="{StaticResource CopyIconBtn}" Margin="6,0,0,0"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Text="Treiber-Version:" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock x:Name="TxtHwNetDriverVer" Text="Ermittle..." Foreground="#38BDF8" FontWeight="Bold" FontSize="11" VerticalAlignment="Center"/>
+                                            <Border x:Name="BadgeHwNetProvider" Background="#162E24" BorderBrush="#059669" BorderThickness="1" CornerRadius="4" Padding="5,1" Margin="6,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
+                                                <TextBlock x:Name="TxtHwNetProvider" Text="REALTEK" FontSize="9" FontWeight="Bold" Foreground="#34D399"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Text="Treiber-Datum:" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtHwNetDriverDate" Grid.Column="1" Text="Ermittle..." Foreground="#F8FAFC" FontSize="11" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Text="Hardware-Status:" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtHwNetStatus" Grid.Column="1" Text="Aktiv &amp; Bereit" Foreground="#34D399" FontWeight="SemiBold" FontSize="11" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <TextBlock Text="MAC-Adresse:" Foreground="#94A3B8" FontSize="11" VerticalAlignment="Center"/>
+                                        <TextBlock x:Name="TxtHwNetMac" Grid.Column="1" Text="Ermittle..." Foreground="#64748B" FontSize="11" VerticalAlignment="Center"/>
+                                        <Button x:Name="BtnCopyHwNetMac" Grid.Column="2" Content="📋" ToolTip="MAC-Adresse kopieren" Style="{StaticResource CopyIconBtn}" Margin="6,0,0,0"/>
+                                    </Grid>
+                                    <Button x:Name="BtnOpenDevMgmtLan" Content="🛠️ LAN-Eigenschaften im Geräte-Manager öffnen" Style="{StaticResource CardMiniBtn}" HorizontalAlignment="Left" Padding="10,5"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- AUDIO -->
+                            <Border x:Name="CardHwAudio" Grid.Column="2" Style="{StaticResource CardBorder}" Padding="18">
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" Grid.Column="0">
+                                            <Border Style="{StaticResource IconBoxBorder}">
+                                                <TextBlock Style="{StaticResource IconBoxText}" Text="&#xE767;"/>
+                                            </Border>
+                                            <TextBlock Text="Audio- &amp; Soundgeräte" FontSize="13.5" FontWeight="Bold" Foreground="#F8FAFC" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <Button x:Name="BtnOpenSoundSettings" Grid.Column="1" Content="⚙️ Sound-Systemsteuerung" ToolTip="Windows Sound-Systemsteuerung (mmsys.cpl) öffnen" Style="{StaticResource CardMiniBtn}" VerticalAlignment="Center" Padding="8,4"/>
+                                    </Grid>
+                                    <Border Style="{StaticResource SeparatorLine}" Margin="0,2,0,10"/>
+
+                                    <StackPanel x:Name="StackHwAudioList">
+                                        <TextBlock Text="Lade Audiogeräte..." Foreground="#94A3B8" FontSize="11"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ===================================================================== -->
+            <!-- TAB: BUFFERBLOAT & NETWORK PERFORMANCE ANALYSIS (WAVEFORM STANDARD) -->
+            <!-- ===================================================================== -->
